@@ -10,14 +10,37 @@ class Player {
   }
 
   draw() {
+    this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.game.ctx.restore();
   }
 
   runLogic() {}
 
-  move() {
-    console.log('move');
+  move(direction) {
+    let rad = (this.direction + 90) * (Math.PI / 180);
+    const x = Math.cos(rad);
+    const y = Math.sin(rad);
+
+    if (direction === 'forward') {
+      this.x -= x * this.speed;
+      this.y -= y * this.speed;
+    } else if (direction === 'backward') {
+      this.x += x * this.speed;
+      this.y += y * this.speed;
+    }
   }
 
-  rotate() {}
+  rotate() {
+    this.direction %= 360;
+
+    this.game.ctx.save();
+    let rad = (this.direction * Math.PI) / 180;
+    this.game.ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+    this.game.ctx.rotate(rad);
+    this.game.ctx.translate(
+      -(this.x + this.width / 2),
+      -(this.y + this.height / 2)
+    );
+  }
 }
