@@ -43,4 +43,15 @@ class Player {
       -(this.y + this.height / 2)
     );
   }
+
+  shoot() {
+    const projectile = new Projectile(
+      this.game,
+      this.x,
+      this.y,
+      this.direction
+    );
+    this.game.projectiles.push(projectile);
+    console.log(this.game.projectiles);
+  }
 }

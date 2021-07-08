@@ -7,8 +7,8 @@ class Game {
 
   start() {
     this.running = true;
-
     this.player = new Player(this, 100, 100);
+    this.projectiles = [];
     this.setControls();
     this.update();
   }
@@ -17,6 +17,7 @@ class Game {
     this.clear();
     //this.drawBackground();
     this.player.draw();
+    this.projectiles.forEach((projectile) => projectile.draw());
   }
 
   drawBackground() {
@@ -31,11 +32,12 @@ class Game {
 
   clear() {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.projectiles.forEach((projectile) => projectile.runLogic());
   }
 
   setControls() {
     this.keyController = {
-      Space: { action: () => console.log(this.player) },
+      Space: { action: () => this.player.shoot() },
       ArrowUp: { pressed: false, action: () => this.player.move('forward') },
       ArrowDown: { pressed: false, action: () => this.player.move('backward') },
       ArrowLeft: { pressed: false, action: () => (this.player.direction -= 4) },
