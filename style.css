@@ -1,0 +1,18 @@
+.screen {
+  margin: 50px auto;
+  border: 1px solid red;
+  width: 800px;
+  height: 600px;
+}
+
+#start {
+  display: none;
+}
+
+#game {
+  /*display: none;*/
+}
+
+#game-over {
+  display: none;
+}
