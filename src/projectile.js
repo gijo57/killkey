@@ -6,7 +6,7 @@ class Projectile {
     this.width = 3;
     this.height = 3;
     this.direction = direction;
-    this.speed = 20;
+    this.speed = 10;
   }
 
   draw() {

@@ -9,30 +9,34 @@ class Game {
     this.running = true;
     this.player = new Player(this, 100, 100);
     this.projectiles = [];
+    this.enemies = [];
     this.setControls();
     this.update();
   }
 
   draw() {
     this.clear();
-    //this.drawBackground();
+    this.drawBackground();
     this.player.draw();
     this.projectiles.forEach((projectile) => projectile.draw());
   }
 
   drawBackground() {
+    this.ctx.save();
+    this.ctx.fillStyle = 'lightgrey';
     this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.ctx.restore();
   }
 
   runLogic() {
     Object.keys(this.keyController).forEach((key) => {
       this.keyController[key].pressed && this.keyController[key].action();
     });
+    this.projectiles.forEach((projectile) => projectile.runLogic());
   }
 
   clear() {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.projectiles.forEach((projectile) => projectile.runLogic());
   }
 
   setControls() {
