@@ -9,11 +9,15 @@ class Player {
     this.speed = 3;
   }
 
-  draw() {}
+  draw() {
+    this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
 
   runLogic() {}
 
-  move() {}
+  move() {
+    console.log('move');
+  }
 
   rotate() {}
 }
