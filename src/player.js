@@ -1,6 +1,7 @@
 class Player {
   constructor(game, x, y) {
     this.game = game;
+    this.health = 100;
     this.x = x;
     this.y = y;
     this.width = 60;
@@ -10,12 +11,20 @@ class Player {
   }
 
   draw() {
+    console.log(this.health);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
   }
 
-  runLogic() {}
+  collide(element) {
+    return (
+      element.x + element.width / 2 >= this.x - this.width / 2 &&
+      element.x - element.width / 2 <= this.x + this.width / 2 &&
+      element.y + element.height / 2 >= this.y - this.height / 2 &&
+      element.y - element.height / 2 <= this.y + this.height / 2
+    );
+  }
 
   move(direction) {
     let rad = (this.direction + 90) * (Math.PI / 180);

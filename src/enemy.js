@@ -1,6 +1,7 @@
 class Enemy {
   constructor(game, x, y) {
     this.game = game;
+    this.health = 50;
     this.x = x;
     this.y = y;
     this.width = 50;
@@ -10,19 +11,31 @@ class Enemy {
   }
 
   draw() {
+    console.log('enemy', this.health);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
     this.direction++;
   }
 
-  runLogic() {
+  move() {
     let rad = (this.direction + 90) * (Math.PI / 180);
     const x = Math.cos(rad);
     const y = Math.sin(rad);
 
     this.x -= x * this.speed;
     this.y -= y * this.speed;
+  }
+
+  die() {}
+
+  collide(element) {
+    return (
+      element.x + element.width / 2 >= this.x - this.width / 2 &&
+      element.x - element.width / 2 <= this.x + this.width / 2 &&
+      element.y + element.height / 2 >= this.y - this.height / 2 &&
+      element.y - element.height / 2 <= this.y + this.height / 2
+    );
   }
 
   rotate() {
