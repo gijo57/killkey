@@ -11,7 +11,6 @@ class Player {
   }
 
   draw() {
-    console.log(this.health);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();

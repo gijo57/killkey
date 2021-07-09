@@ -1,8 +1,13 @@
 class Game {
-  constructor(canvas) {
+  constructor(canvas, map, tileSize) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
+    this.map = map;
+    this.tileSize = tileSize;
+    this.horizontalTileCount = map[0].length;
+    this.verticalTileCount = map.length;
     this.running = false;
+    console.log(tileSize);
   }
 
   start() {
@@ -17,16 +22,37 @@ class Game {
 
   draw() {
     this.clear();
-    this.drawBackground();
+    this.drawMap();
     this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());
   }
 
-  drawBackground() {
+  drawMap() {
     this.ctx.save();
-    this.ctx.fillStyle = 'lightgrey';
-    this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < this.horizontalTileCount; i++) {
+      for (let j = 0; j < this.verticalTileCount; j++) {
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillRect(
+          0 + i * this.tileSize.width,
+          0 + j * this.tileSize.height,
+          this.tileSize.width,
+          this.tileSize.height
+        );
+
+        if (this.map[i][j] === 1) {
+          this.ctx.fillStyle = 'black';
+        } else {
+          this.ctx.fillStyle = 'grey';
+        }
+        this.ctx.fillRect(
+          0 + i * this.tileSize.width + 1,
+          0 + j * this.tileSize.height + 1,
+          this.tileSize.width - 1,
+          this.tileSize.height - 2
+        );
+      }
+    }
     this.ctx.restore();
   }
 
