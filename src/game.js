@@ -10,6 +10,7 @@ class Game {
     this.player = new Player(this, 100, 100);
     this.projectiles = [];
     this.enemies = [];
+    this.enemies.push(new Enemy(this, 400, 400));
     this.setControls();
     this.update();
   }
@@ -18,6 +19,7 @@ class Game {
     this.clear();
     this.drawBackground();
     this.player.draw();
+    this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());
   }
 
@@ -33,6 +35,7 @@ class Game {
       this.keyController[key].pressed && this.keyController[key].action();
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
+    this.enemies.forEach((enemy) => enemy.runLogic());
   }
 
   clear() {
@@ -41,11 +44,12 @@ class Game {
 
   setControls() {
     this.keyController = {
+      Shift: { pressed: false, action: () => this.player.run() },
       Space: { action: () => this.player.shoot() },
       ArrowUp: { pressed: false, action: () => this.player.move('forward') },
       ArrowDown: { pressed: false, action: () => this.player.move('backward') },
-      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 4) },
-      ArrowRight: { pressed: false, action: () => (this.player.direction += 4) }
+      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 3) },
+      ArrowRight: { pressed: false, action: () => (this.player.direction += 3) }
     };
 
     window.addEventListener('keydown', (e) => {

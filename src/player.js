@@ -6,7 +6,7 @@ class Player {
     this.width = 60;
     this.height = 20;
     this.direction = 0;
-    this.speed = 3;
+    this.speed = 2;
   }
 
   draw() {
@@ -44,6 +44,12 @@ class Player {
     );
   }
 
+  run() {
+    if (this.game.keyController.Shift.pressed) {
+      this.speed = 5;
+    }
+  }
+
   shoot() {
     const projectile = new Projectile(
       this.game,
@@ -52,6 +58,5 @@ class Player {
       this.direction
     );
     this.game.projectiles.push(projectile);
-    console.log(this.game.projectiles);
   }
 }
