@@ -8,11 +8,13 @@ class Enemy {
     this.height = 20;
     this.direction = 0;
     this.speed = 2;
+    this.dead = false;
   }
 
   draw() {
-    console.log('enemy', this.health);
-    this.rotate();
+    if (!this.dead) {
+      this.rotate();
+    }
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
     this.direction++;
@@ -27,7 +29,9 @@ class Enemy {
     this.y -= y * this.speed;
   }
 
-  die() {}
+  die() {
+    this.dead = true;
+  }
 
   collide(element) {
     return (

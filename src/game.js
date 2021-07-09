@@ -35,7 +35,11 @@ class Game {
       this.keyController[key].pressed && this.keyController[key].action();
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
-    this.enemies.forEach((enemy) => enemy.move());
+    this.enemies.forEach((enemy) => {
+      if (!enemy.dead) {
+        enemy.move();
+      }
+    });
     this.checkCollisions();
   }
 
@@ -77,24 +81,28 @@ class Game {
   }
 
   checkCollisions() {
-    this.enemies.forEach((enemy, enemyIndex) => {
+    this.enemies.forEach((enemy) => {
       if (enemy.collide(this.player)) {
-        enemy.health -= 1;
-        if (enemy.health <= 0) {
-          this.enemies.splice(enemyIndex, 1);
-        }
-        this.player.health -= 1;
-        if (this.player.health <= 0) {
-          this.gameOver();
+        if (!enemy.dead) {
+          enemy.health -= 1;
+          if (enemy.health <= 0) {
+            enemy.die();
+          }
+          this.player.health -= 1;
+          if (this.player.health <= 0) {
+            this.gameOver();
+          }
         }
       }
 
       this.projectiles.forEach((projectile, projectileIndex) => {
         if (projectile.collide(enemy)) {
-          this.projectiles.splice(projectileIndex, 1);
-          enemy.health -= 5;
-          if (enemy.health <= 0) {
-            this.enemies.splice(enemyIndex, 1);
+          if (!enemy.dead) {
+            this.projectiles.splice(projectileIndex, 1);
+            enemy.health -= 5;
+            if (enemy.health <= 0) {
+              enemy.die();
+            }
           }
         }
       });
@@ -103,6 +111,7 @@ class Game {
 
   gameOver() {
     this.running = false;
+    console.log('GAME OVER!');
   }
 
   update() {
