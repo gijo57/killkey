@@ -1,17 +1,12 @@
 class Game {
-  constructor(canvas, map, tileSize) {
+  constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.map = map;
-    this.tileSize = tileSize;
-    this.horizontalTileCount = map[0].length;
-    this.verticalTileCount = map.length;
     this.running = false;
-    this.offsetX = 0;
-    this.offsetY = 0;
   }
 
   start() {
+    this.map = new Map(this);
     this.running = true;
     this.player = new Player(this, 300, 300);
     this.projectiles = [];
@@ -23,45 +18,10 @@ class Game {
 
   draw() {
     this.clear();
-    this.drawMap();
+    this.map.draw();
     this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());
-  }
-
-  drawMap() {
-    this.ctx.save();
-    for (let i = 0; i < this.horizontalTileCount; i++) {
-      for (let j = 0; j < this.verticalTileCount; j++) {
-        console.log(map[j][i]);
-        if (map[j][i] === 1) {
-          this.ctx.fillStyle = 'black';
-        } else if (map[j][i] === 0) {
-          this.ctx.fillStyle = 'grey';
-        }
-
-        this.ctx.fillRect(
-          0 + i * this.tileSize.width - this.offsetX,
-          0 + j * this.tileSize.height - this.offsetY,
-          this.tileSize.width,
-          this.tileSize.height
-        );
-        this.ctx.fillRect(
-          0 + i * this.tileSize.width + 1 - this.offsetX,
-          0 + j * this.tileSize.height + 1 - this.offsetY,
-          this.tileSize.width - 1,
-          this.tileSize.height - 2
-        );
-        // this.ctx.fillStyle = 'red';
-        // this.ctx.font = '36px Arial';
-        // this.ctx.fillText(
-        //   i + 1 + j * this.horizontalTileCount,
-        //   0 + i * this.tileSize.width + 5 - this.offsetX,
-        //   0 + j * this.tileSize.height + 50 - this.offsetY
-        // );
-      }
-    }
-    this.ctx.restore();
   }
 
   runLogic() {
@@ -87,8 +47,8 @@ class Game {
       Space: { action: () => this.player.shoot() },
       ArrowUp: { pressed: false, action: () => this.player.move('forward') },
       ArrowDown: { pressed: false, action: () => this.player.move('backward') },
-      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 7) },
-      ArrowRight: { pressed: false, action: () => (this.player.direction += 7) }
+      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 5) },
+      ArrowRight: { pressed: false, action: () => (this.player.direction += 5) }
     };
 
     window.addEventListener('keydown', (e) => {

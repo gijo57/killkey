@@ -11,8 +11,8 @@ class Player {
   }
 
   draw() {
-    console.log('offsetX', this.game.offsetX, 'offsetY', this.game.offsetY);
-    console.log('x', this.x, 'y', this.y);
+    // console.log('offsetX', this.game.offsetX, 'offsetY', this.game.offsetY);
+    // console.log('x', this.x, 'y', this.y);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
