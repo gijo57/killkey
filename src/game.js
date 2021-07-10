@@ -33,10 +33,10 @@ class Game {
     this.ctx.save();
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        console.log(map[i][j]);
-        if (map[i][j] === 1) {
+        console.log(map[j][i]);
+        if (map[j][i] === 1) {
           this.ctx.fillStyle = 'black';
-        } else if (map[i][j] === 0) {
+        } else if (map[j][i] === 0) {
           this.ctx.fillStyle = 'grey';
         }
 
@@ -87,8 +87,8 @@ class Game {
       Space: { action: () => this.player.shoot() },
       ArrowUp: { pressed: false, action: () => this.player.move('forward') },
       ArrowDown: { pressed: false, action: () => this.player.move('backward') },
-      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 3) },
-      ArrowRight: { pressed: false, action: () => (this.player.direction += 3) }
+      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 7) },
+      ArrowRight: { pressed: false, action: () => (this.player.direction += 7) }
     };
 
     window.addEventListener('keydown', (e) => {
