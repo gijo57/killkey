@@ -6,9 +6,9 @@ class Game {
   }
 
   start() {
-    this.map = new Map(this);
     this.running = true;
     this.player = new Player(this, 300, 300);
+    this.map = new Map(this);
     this.projectiles = [];
     this.enemies = [];
     this.enemies.push(new Enemy(this, 400, 400));

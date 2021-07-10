@@ -28,18 +28,20 @@ class Player {
   }
 
   move(direction) {
-    let rad = (this.direction + 90) * (Math.PI / 180);
-    const x = Math.cos(rad);
-    const y = Math.sin(rad);
+    if (!this.colliding) {
+      let rad = (this.direction + 90) * (Math.PI / 180);
+      const x = Math.cos(rad);
+      const y = Math.sin(rad);
 
-    if (direction === 'forward') {
-      this.x -= x * this.speed;
-      this.y -= y * this.speed;
-    }
+      if (direction === 'forward') {
+        this.x -= x * this.speed;
+        this.y -= y * this.speed;
+      }
 
-    if (direction === 'backward') {
-      this.x += x * this.speed;
-      this.y += y * this.speed;
+      if (direction === 'backward') {
+        this.x += x * this.speed;
+        this.y += y * this.speed;
+      }
     }
   }
 
