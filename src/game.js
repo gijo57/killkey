@@ -7,12 +7,13 @@ class Game {
     this.horizontalTileCount = map[0].length;
     this.verticalTileCount = map.length;
     this.running = false;
-    console.log(tileSize);
+    this.offsetX = 0;
+    this.offsetY = 0;
   }
 
   start() {
     this.running = true;
-    this.player = new Player(this, 100, 100);
+    this.player = new Player(this, 300, 300);
     this.projectiles = [];
     this.enemies = [];
     this.enemies.push(new Enemy(this, 400, 400));
@@ -32,25 +33,32 @@ class Game {
     this.ctx.save();
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        this.ctx.fillStyle = 'black';
+        console.log(map[i][j]);
+        if (map[i][j] === 1) {
+          this.ctx.fillStyle = 'black';
+        } else if (map[i][j] === 0) {
+          this.ctx.fillStyle = 'grey';
+        }
+
         this.ctx.fillRect(
-          0 + i * this.tileSize.width,
-          0 + j * this.tileSize.height,
+          0 + i * this.tileSize.width - this.offsetX,
+          0 + j * this.tileSize.height - this.offsetY,
           this.tileSize.width,
           this.tileSize.height
         );
-
-        if (this.map[i][j] === 1) {
-          this.ctx.fillStyle = 'black';
-        } else {
-          this.ctx.fillStyle = 'grey';
-        }
         this.ctx.fillRect(
-          0 + i * this.tileSize.width + 1,
-          0 + j * this.tileSize.height + 1,
+          0 + i * this.tileSize.width + 1 - this.offsetX,
+          0 + j * this.tileSize.height + 1 - this.offsetY,
           this.tileSize.width - 1,
           this.tileSize.height - 2
         );
+        // this.ctx.fillStyle = 'red';
+        // this.ctx.font = '36px Arial';
+        // this.ctx.fillText(
+        //   i + 1 + j * this.horizontalTileCount,
+        //   0 + i * this.tileSize.width + 5 - this.offsetX,
+        //   0 + j * this.tileSize.height + 50 - this.offsetY
+        // );
       }
     }
     this.ctx.restore();

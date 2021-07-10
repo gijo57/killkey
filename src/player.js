@@ -7,10 +7,12 @@ class Player {
     this.width = 60;
     this.height = 20;
     this.direction = 0;
-    this.speed = 2;
+    this.speed = 5;
   }
 
   draw() {
+    console.log('offsetX', this.game.offsetX, 'offsetY', this.game.offsetY);
+    console.log('x', this.x, 'y', this.y);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
@@ -33,7 +35,9 @@ class Player {
     if (direction === 'forward') {
       this.x -= x * this.speed;
       this.y -= y * this.speed;
-    } else if (direction === 'backward') {
+    }
+
+    if (direction === 'backward') {
       this.x += x * this.speed;
       this.y += y * this.speed;
     }
@@ -41,7 +45,6 @@ class Player {
 
   rotate() {
     this.direction %= 360;
-
     this.game.ctx.save();
     let rad = (this.direction * Math.PI) / 180;
     this.game.ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
