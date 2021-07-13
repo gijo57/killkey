@@ -15,7 +15,7 @@ class Map {
       for (let j = 0; j < this.verticalTileCount; j++) {
         if (this.map[j][i] === 1) {
           this.game.ctx.fillStyle = 'black';
-        } else if (this.map[j][i] === 0) {
+        } else {
           this.game.ctx.fillStyle = 'grey';
         }
 
@@ -37,8 +37,8 @@ class Map {
         y: -this.game.player.directionVector.y
       };
 
-      this.offsetX += this.directionVector.x * this.game.player.speed;
-      this.offsetY += this.directionVector.y * this.game.player.speed;
+      this.offsetX += this.directionVector.x * this.game.player.speed * 3;
+      this.offsetY += this.directionVector.y * this.game.player.speed * 3;
     }
   }
 }

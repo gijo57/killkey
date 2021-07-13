@@ -4,7 +4,7 @@ class Enemy {
     this.health = 50;
     this.x = x;
     this.y = y;
-    this.width = 50;
+    this.width = 40;
     this.height = 20;
     this.direction = 0;
     this.speed = 2;

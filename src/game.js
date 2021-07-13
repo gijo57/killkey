@@ -7,7 +7,11 @@ class Game {
 
   start() {
     this.running = true;
-    this.player = new Player(this, 300, 300);
+    this.player = new Player(
+      this,
+      CAMERA_PADDING_HORIZONTAL + 1,
+      CAMERA_PADDING_VERTICAL + 1
+    );
     this.map = new Map(this);
     this.projectiles = [];
     this.enemies = [];

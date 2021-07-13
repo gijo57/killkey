@@ -3,4 +3,5 @@ const TILE_SIZE = {
   height: 50
 };
 
-const CAMERA_PADDING = 250;
+const CAMERA_PADDING_VERTICAL = 300;
+const CAMERA_PADDING_HORIZONTAL = 400;

@@ -4,10 +4,10 @@ class Player {
     this.health = 100;
     this.x = x;
     this.y = y;
-    this.width = 60;
+    this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 2;
+    this.speed = 1;
   }
 
   draw() {
@@ -32,35 +32,35 @@ class Player {
     this.directionVector = { x, y };
 
     if (direction === 'forward') {
-      if (this.x < this.game.canvas.width - CAMERA_PADDING) {
+      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;
       } else {
-        this.x = this.game.canvas.width - CAMERA_PADDING;
+        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
         this.game.map.moveCamera();
       }
 
-      if (this.x > CAMERA_PADDING) {
+      if (this.x > CAMERA_PADDING_HORIZONTAL) {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;
       } else {
-        this.x = CAMERA_PADDING;
+        this.x = CAMERA_PADDING_HORIZONTAL;
         this.game.map.moveCamera();
       }
 
-      if (this.y < this.game.canvas.height - CAMERA_PADDING) {
+      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;
       } else {
-        this.y = this.game.canvas.height - CAMERA_PADDING;
+        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
         this.game.map.moveCamera();
       }
 
-      if (this.y > CAMERA_PADDING) {
+      if (this.y > CAMERA_PADDING_VERTICAL) {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;
       } else {
-        this.y = CAMERA_PADDING;
+        this.y = CAMERA_PADDING_VERTICAL;
         this.game.map.moveCamera();
       }
     }
