@@ -20,16 +20,10 @@ class Map {
         }
 
         this.game.ctx.fillRect(
-          0 + i * this.tileSize.width - this.offsetX,
-          0 + j * this.tileSize.height - this.offsetY,
+          0 + i * this.tileSize.width - this.game.player.x,
+          0 + j * this.tileSize.height - this.game.player.y,
           this.tileSize.width,
           this.tileSize.height
-        );
-        this.game.ctx.fillRect(
-          0 + i * this.tileSize.width + 1 - this.offsetX,
-          0 + j * this.tileSize.height + 1 - this.offsetY,
-          this.tileSize.width - 1,
-          this.tileSize.height - 2
         );
       }
     }
