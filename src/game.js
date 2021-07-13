@@ -32,12 +32,13 @@ class Game {
     Object.keys(this.keyController).forEach((key) => {
       this.keyController[key].pressed && this.keyController[key].action();
     });
-    this.projectiles.forEach((projectile) => projectile.runLogic());
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
         enemy.move();
+        enemy.shoot();
       }
     });
+    this.projectiles.forEach((projectile) => projectile.runLogic());
     this.checkCollisions();
   }
 
@@ -101,6 +102,13 @@ class Game {
             if (enemy.health <= 0) {
               enemy.die();
             }
+          }
+        }
+        if (projectile.collide(this.player)) {
+          this.projectiles.splice(projectileIndex, 1);
+          this.player.health -= 5;
+          if (this.player.health <= 0) {
+            this.gameOver();
           }
         }
       });

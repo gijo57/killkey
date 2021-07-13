@@ -7,7 +7,7 @@ class Enemy {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 2;
+    this.speed = 1;
     this.dead = false;
   }
 
@@ -53,5 +53,15 @@ class Enemy {
       -(this.x + this.width / 2),
       -(this.y + this.height / 2)
     );
+  }
+
+  shoot() {
+    const projectile = new Projectile(
+      this.game,
+      this.x - 50,
+      this.y - 50,
+      this.direction
+    );
+    this.game.projectiles.push(projectile);
   }
 }

@@ -15,16 +15,30 @@ class Map {
       for (let j = 0; j < this.verticalTileCount; j++) {
         if (this.map[j][i] === 1) {
           this.game.ctx.fillStyle = 'black';
+          this.game.ctx.fillRect(
+            0 + i * this.tileSize.width - this.offsetX,
+            0 + j * this.tileSize.height - this.offsetY,
+            this.tileSize.width,
+            this.tileSize.height
+          );
         } else {
           this.game.ctx.fillStyle = 'grey';
+          this.game.ctx.fillRect(
+            0 + i * this.tileSize.width - this.offsetX,
+            0 + j * this.tileSize.height - this.offsetY,
+            this.tileSize.width,
+            this.tileSize.height
+          );
+          if (this.map[j][i] === 'K') {
+            this.game.ctx.fillStyle = 'red';
+            this.game.ctx.font = '20px Arial';
+            this.game.ctx.fillText(
+              'KEY',
+              0 + i * this.tileSize.width - this.offsetX,
+              0 + j * this.tileSize.height - this.offsetY
+            );
+          }
         }
-
-        this.game.ctx.fillRect(
-          0 + i * this.tileSize.width - this.offsetX,
-          0 + j * this.tileSize.height - this.offsetY,
-          this.tileSize.width,
-          this.tileSize.height
-        );
       }
     }
     this.game.ctx.restore();
