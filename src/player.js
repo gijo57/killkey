@@ -8,6 +8,7 @@ class Player {
     this.height = 20;
     this.direction = 0;
     this.speed = 1;
+    this.hasKey = false;
   }
 
   draw() {

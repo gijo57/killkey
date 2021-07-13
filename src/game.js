@@ -12,6 +12,7 @@ class Game {
       CAMERA_PADDING_HORIZONTAL + 1,
       CAMERA_PADDING_VERTICAL + 1
     );
+    this.key = new Key(this);
     this.map = new Map(this);
     this.projectiles = [];
     this.enemies = [];
@@ -23,6 +24,7 @@ class Game {
   draw() {
     this.clear();
     this.map.draw();
+    this.key.draw();
     this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());

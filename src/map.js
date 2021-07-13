@@ -30,13 +30,10 @@ class Map {
             this.tileSize.height
           );
           if (this.map[j][i] === 'K') {
-            this.game.ctx.fillStyle = 'red';
-            this.game.ctx.font = '20px Arial';
-            this.game.ctx.fillText(
-              'KEY',
-              0 + i * this.tileSize.width - this.offsetX,
-              0 + j * this.tileSize.height - this.offsetY
-            );
+            this.game.keyLocation = {
+              x: 0 + i * this.tileSize.width - this.offsetX,
+              y: 0 + j * this.tileSize.height - this.offsetY
+            };
           }
         }
       }
