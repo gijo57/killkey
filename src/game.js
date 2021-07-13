@@ -24,7 +24,9 @@ class Game {
   draw() {
     this.clear();
     this.map.draw();
-    this.key.draw();
+    if (!this.player.hasKey) {
+      this.key.draw();
+    }
     this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());
