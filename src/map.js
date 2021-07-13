@@ -20,13 +20,25 @@ class Map {
         }
 
         this.game.ctx.fillRect(
-          0 + i * this.tileSize.width - this.game.player.x,
-          0 + j * this.tileSize.height - this.game.player.y,
+          0 + i * this.tileSize.width - this.offsetX,
+          0 + j * this.tileSize.height - this.offsetY,
           this.tileSize.width,
           this.tileSize.height
         );
       }
     }
     this.game.ctx.restore();
+  }
+
+  moveCamera() {
+    if (this.game.player.directionVector) {
+      this.directionVector = {
+        x: -this.game.player.directionVector.x,
+        y: -this.game.player.directionVector.y
+      };
+
+      this.offsetX += this.directionVector.x * this.game.player.speed;
+      this.offsetY += this.directionVector.y * this.game.player.speed;
+    }
   }
 }

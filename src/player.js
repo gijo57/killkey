@@ -7,12 +7,10 @@ class Player {
     this.width = 60;
     this.height = 20;
     this.direction = 0;
-    this.speed = 5;
+    this.speed = 2;
   }
 
   draw() {
-    // console.log('offsetX', this.game.offsetX, 'offsetY', this.game.offsetY);
-    // console.log('x', this.x, 'y', this.y);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
@@ -28,20 +26,48 @@ class Player {
   }
 
   move(direction) {
-    if (!this.colliding) {
-      let rad = (this.direction + 90) * (Math.PI / 180);
-      const x = Math.cos(rad);
-      const y = Math.sin(rad);
+    let rad = (this.direction + 90) * (Math.PI / 180);
+    const x = Math.cos(rad);
+    const y = Math.sin(rad);
+    this.directionVector = { x, y };
 
-      if (direction === 'forward') {
-        this.x -= x * this.speed;
-        this.y -= y * this.speed;
+    if (direction === 'forward') {
+      if (this.x < this.game.canvas.width - CAMERA_PADDING) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = this.game.canvas.width - CAMERA_PADDING;
+        this.game.map.moveCamera();
       }
 
-      if (direction === 'backward') {
-        this.x += x * this.speed;
-        this.y += y * this.speed;
+      if (this.x > CAMERA_PADDING) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = CAMERA_PADDING;
+        this.game.map.moveCamera();
       }
+
+      if (this.y < this.game.canvas.height - CAMERA_PADDING) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = this.game.canvas.height - CAMERA_PADDING;
+        this.game.map.moveCamera();
+      }
+
+      if (this.y > CAMERA_PADDING) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = CAMERA_PADDING;
+        this.game.map.moveCamera();
+      }
+    }
+
+    if (direction === 'backward') {
+      this.x += this.directionVector.x * this.speed;
+      this.y += this.directionVector.y * this.speed;
     }
   }
 
