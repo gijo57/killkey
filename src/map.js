@@ -15,36 +15,31 @@ class Map {
       for (let j = 0; j < this.verticalTileCount; j++) {
         if (this.map[j][i] === 1) {
           this.game.ctx.fillStyle = 'black';
-          this.game.ctx.fillRect(
-            0 + i * this.tileSize - this.offsetX,
-            0 + j * this.tileSize - this.offsetY,
-            this.tileSize,
-            this.tileSize
-          );
+          this.drawTile(i, j);
         } else {
           this.game.ctx.fillStyle = 'grey';
-          this.game.ctx.fillRect(
-            0 + i * this.tileSize - this.offsetX,
-            0 + j * this.tileSize - this.offsetY,
-            this.tileSize,
-            this.tileSize
-          );
+          this.drawTile(i, j);
+
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
             this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
           } else if (this.map[j][i] === 'D') {
             this.game.ctx.fillStyle = 'brown';
-            this.game.ctx.fillRect(
-              0 + i * this.tileSize - this.offsetX,
-              0 + j * this.tileSize - this.offsetY,
-              this.tileSize,
-              this.tileSize
-            );
+            this.drawTile(i, j);
           }
         }
       }
     }
     this.game.ctx.restore();
+  }
+
+  drawTile(i, j) {
+    this.game.ctx.fillRect(
+      0 + i * this.tileSize - this.offsetX,
+      0 + j * this.tileSize - this.offsetY,
+      this.tileSize,
+      this.tileSize
+    );
   }
 
   moveCamera() {
