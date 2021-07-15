@@ -19,7 +19,6 @@ class Map {
         } else {
           this.game.ctx.fillStyle = 'grey';
           this.drawTile(i, j);
-
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
             this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
