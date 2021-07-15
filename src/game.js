@@ -40,7 +40,7 @@ class Game {
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
         enemy.move();
-        enemy.shoot();
+        //enemy.shoot();
       }
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
@@ -85,6 +85,7 @@ class Game {
   }
 
   checkCollisions() {
+    //console.log(this.map.collide(this.player));
     if (this.key.isPicked(this.player)) {
       this.player.hasKey = true;
     }

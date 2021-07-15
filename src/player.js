@@ -12,7 +12,6 @@ class Player {
   }
 
   draw() {
-    console.log('player', this.x, this.y);
     this.rotate();
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
@@ -33,43 +32,45 @@ class Player {
     const y = Math.sin(rad);
     this.directionVector = { x, y };
 
-    if (direction === 'forward') {
-      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
+    if (!this.game.map.collide(this)) {
+      if (direction === 'forward') {
+        if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
+          this.x -= this.directionVector.x * this.speed;
+          this.y -= this.directionVector.y * this.speed;
+        } else {
+          this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
+          this.game.map.moveCamera();
+        }
+
+        if (this.x > CAMERA_PADDING_HORIZONTAL) {
+          this.x -= this.directionVector.x * this.speed;
+          this.y -= this.directionVector.y * this.speed;
+        } else {
+          this.x = CAMERA_PADDING_HORIZONTAL;
+          this.game.map.moveCamera();
+        }
+
+        if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
+          this.x -= this.directionVector.x * this.speed;
+          this.y -= this.directionVector.y * this.speed;
+        } else {
+          this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
+          this.game.map.moveCamera();
+        }
+
+        if (this.y > CAMERA_PADDING_VERTICAL) {
+          this.x -= this.directionVector.x * this.speed;
+          this.y -= this.directionVector.y * this.speed;
+        } else {
+          this.y = CAMERA_PADDING_VERTICAL;
+          this.game.map.moveCamera();
+        }
       }
 
-      if (this.x > CAMERA_PADDING_HORIZONTAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.x = CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
+      if (direction === 'backward') {
+        this.x += this.directionVector.x * this.speed;
+        this.y += this.directionVector.y * this.speed;
       }
-
-      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
-      }
-
-      if (this.y > CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.y = CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
-      }
-    }
-
-    if (direction === 'backward') {
-      this.x += this.directionVector.x * this.speed;
-      this.y += this.directionVector.y * this.speed;
     }
   }
 
@@ -94,8 +95,8 @@ class Player {
   shoot() {
     const projectile = new Projectile(
       this.game,
-      this.x,
-      this.y,
+      this.x + 50,
+      this.y + 50,
       this.direction
     );
     this.game.projectiles.push(projectile);
