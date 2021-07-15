@@ -85,7 +85,6 @@ class Game {
   }
 
   checkCollisions() {
-    //console.log(this.map.collide(this.player));
     if (this.key.isPicked(this.player)) {
       this.player.hasKey = true;
     }
@@ -116,10 +115,13 @@ class Game {
         }
         if (projectile.collide(this.player)) {
           this.projectiles.splice(projectileIndex, 1);
-          this.player.health -= 5;
+          //this.player.health -= 5;
           if (this.player.health <= 0) {
             this.gameOver();
           }
+        }
+        if (this.map.collide(projectile)) {
+          this.projectiles.splice(projectileIndex, 1);
         }
       });
     });
