@@ -10,7 +10,7 @@ class Game {
     this.running = true;
     this.player = new Player(
       this,
-      CAMERA_PADDING_HORIZONTAL + 1,
+      CAMERA_PADDING_HORIZONTAL + 100,
       CAMERA_PADDING_VERTICAL + 1
     );
     this.map = new Map(this);
@@ -130,6 +130,11 @@ class Game {
   gameOver() {
     this.running = false;
     console.log('GAME OVER!');
+  }
+
+  passLevel() {
+    this.running = false;
+    console.log('PASS LEVEL!');
   }
 
   update() {

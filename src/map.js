@@ -32,6 +32,14 @@ class Map {
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
             this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
+          } else if (this.map[j][i] === 'D') {
+            this.game.ctx.fillStyle = 'brown';
+            this.game.ctx.fillRect(
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
           }
         }
       }
@@ -46,25 +54,33 @@ class Map {
         y: -this.game.player.directionVector.y
       };
 
-      this.offsetX += this.directionVector.x * this.game.player.speed * 3;
-      this.offsetY += this.directionVector.y * this.game.player.speed * 3;
+      this.offsetX += this.directionVector.x * this.game.player.speed * 3; //FIX THIS
+      this.offsetY += this.directionVector.y * this.game.player.speed * 3; //FIX THIS
     }
   }
 
   collide(element) {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        if (this.map[j][i] === 1) {
-          let x = 0 + i * this.tileSize - this.offsetX;
-          let y = 0 + j * this.tileSize - this.offsetY;
-
-          if (
-            element.x + element.width / 2 >= x - this.tileSize / 2 &&
-            element.x - element.width / 2 <= x + this.tileSize / 2 &&
-            element.y + element.height / 2 >= y - this.tileSize / 2 &&
-            element.y - element.height / 2 <= y + this.tileSize / 2
-          ) {
+        let x = 0 + i * this.tileSize - this.offsetX;
+        let y = 0 + j * this.tileSize - this.offsetY;
+        if (
+          element.x + element.width / 2 >= x - this.tileSize / 2 &&
+          element.x - element.width / 2 <= x + this.tileSize / 2 &&
+          element.y + element.height / 2 >= y - this.tileSize / 2 &&
+          element.y - element.height / 2 <= y + this.tileSize / 2
+        ) {
+          if (this.map[j][i] === 1) {
+            element.speed = 0;
             return true;
+          }
+          if (this.map[j][i] === 'D') {
+            if (this.game.player.hasKey) {
+              this.game.passLevel();
+            } else {
+              element.speed = 0;
+              return true;
+            }
           }
         }
       }

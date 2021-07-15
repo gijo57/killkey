@@ -32,45 +32,45 @@ class Player {
     const y = Math.sin(rad);
     this.directionVector = { x, y };
 
-    if (!this.game.map.collide(this)) {
-      if (direction === 'forward') {
-        if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
-          this.x -= this.directionVector.x * this.speed;
-          this.y -= this.directionVector.y * this.speed;
-        } else {
-          this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
-          this.game.map.moveCamera();
-        }
+    this.game.map.collide(this);
 
-        if (this.x > CAMERA_PADDING_HORIZONTAL) {
-          this.x -= this.directionVector.x * this.speed;
-          this.y -= this.directionVector.y * this.speed;
-        } else {
-          this.x = CAMERA_PADDING_HORIZONTAL;
-          this.game.map.moveCamera();
-        }
-
-        if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
-          this.x -= this.directionVector.x * this.speed;
-          this.y -= this.directionVector.y * this.speed;
-        } else {
-          this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
-          this.game.map.moveCamera();
-        }
-
-        if (this.y > CAMERA_PADDING_VERTICAL) {
-          this.x -= this.directionVector.x * this.speed;
-          this.y -= this.directionVector.y * this.speed;
-        } else {
-          this.y = CAMERA_PADDING_VERTICAL;
-          this.game.map.moveCamera();
-        }
+    if (direction === 'forward') {
+      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera();
       }
 
-      if (direction === 'backward') {
-        this.x += this.directionVector.x * this.speed;
-        this.y += this.directionVector.y * this.speed;
+      if (this.x > CAMERA_PADDING_HORIZONTAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera();
       }
+
+      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera();
+      }
+
+      if (this.y > CAMERA_PADDING_VERTICAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera();
+      }
+    }
+
+    if (direction === 'backward') {
+      this.x += this.directionVector.x * this.speed;
+      this.y += this.directionVector.y * this.speed;
     }
   }
 
