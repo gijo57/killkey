@@ -1,8 +1,8 @@
 class Key {
-  constructor(game, x, y) {
+  constructor(game) {
     this.game = game;
-    this.x = x;
-    this.y = y;
+    this.width = 30;
+    this.height = 10;
   }
 
   draw() {
@@ -17,12 +17,16 @@ class Key {
     this.game.ctx.restore();
   }
 
-  playerHasPicked(element) {
+  isPicked(element) {
     return (
-      element.x + element.width / 2 >= this.x - this.width / 2 &&
-      element.x - element.width / 2 <= this.x + this.width / 2 &&
-      element.y + element.height / 2 >= this.y - this.height / 2 &&
-      element.y - element.height / 2 <= this.y + this.height / 2
+      element.x + element.width / 2 >=
+        this.game.keyLocation.x - this.width / 2 &&
+      element.x - element.width / 2 <=
+        this.game.keyLocation.x + this.width / 2 &&
+      element.y + element.height / 2 >=
+        this.game.keyLocation.y - this.height / 2 &&
+      element.y - element.height / 2 <=
+        this.game.keyLocation.y + this.height / 2
     );
   }
 }

@@ -30,10 +30,10 @@ class Map {
             this.tileSize.height
           );
           if (this.map[j][i] === 'K') {
-            this.game.keyLocation = {
-              x: 0 + i * this.tileSize.width - this.offsetX,
-              y: 0 + j * this.tileSize.height - this.offsetY
-            };
+            this.game.keyLocation.x =
+              0 + i * this.tileSize.width - this.offsetX;
+            this.game.keyLocation.y =
+              0 + i * this.tileSize.width - this.offsetY;
           }
         }
       }

@@ -3,6 +3,7 @@ class Game {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.running = false;
+    this.keyLocation = {};
   }
 
   start() {
@@ -12,8 +13,8 @@ class Game {
       CAMERA_PADDING_HORIZONTAL + 1,
       CAMERA_PADDING_VERTICAL + 1
     );
-    this.key = new Key(this);
     this.map = new Map(this);
+    this.key = new Key(this);
     this.projectiles = [];
     this.enemies = [];
     this.enemies.push(new Enemy(this, 400, 400));
@@ -84,6 +85,10 @@ class Game {
   }
 
   checkCollisions() {
+    if (this.key.isPicked(this.player)) {
+      this.player.hasKey = true;
+    }
+
     this.enemies.forEach((enemy) => {
       if (enemy.collide(this.player)) {
         if (!enemy.dead) {
