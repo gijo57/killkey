@@ -7,7 +7,7 @@ class Player {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 3;
+    this.speed = 2.5;
     this.hasKey = false;
   }
 

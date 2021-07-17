@@ -80,8 +80,15 @@ class Map {
   collide(element, newOffsetX, newOffsetY) {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        let x = 0 + i * this.tileSize - newOffsetX;
-        let y = 0 + j * this.tileSize - newOffsetY;
+        let x, y;
+        if (!(element instanceof Projectile)) {
+          x = 0 + i * this.tileSize - newOffsetX;
+          y = 0 + j * this.tileSize - newOffsetY;
+        } else {
+          x = 0 + i * this.tileSize - this.offsetX;
+          y = 0 + j * this.tileSize - this.offsetY;
+        }
+
         if (
           element.x + element.width / 2 >= x - this.tileSize / 2 &&
           element.x - element.width / 2 <= x + this.tileSize / 2 &&
