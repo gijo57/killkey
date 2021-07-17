@@ -127,12 +127,10 @@ class Player {
   }
 
   shoot() {
-    const projectile = new Projectile(
-      this.game,
-      this.x,
-      this.y,
-      this.direction
-    );
+    this.calculateDirection();
+    const x = this.x - this.directionVector.x * 5;
+    const y = this.y - this.directionVector.y * 5;
+    const projectile = new Projectile(this.game, x, y, this.direction);
     this.game.projectiles.push(projectile);
   }
 }

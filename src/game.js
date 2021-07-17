@@ -11,7 +11,7 @@ class Game {
     this.running = true;
     this.player = new Player(
       this,
-      CAMERA_PADDING_HORIZONTAL,
+      CAMERA_PADDING_HORIZONTAL + 50,
       CAMERA_PADDING_VERTICAL + 1
     );
     this.map = new Map(this);

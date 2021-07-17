@@ -13,11 +13,11 @@ class Enemy {
 
   draw() {
     if (!this.dead) {
-      //this.rotate();
+      this.rotate();
     }
     this.game.ctx.fillRect(
-      this.x - this.game.map.offsetX,
-      this.y - this.game.map.offsetY,
+      this.x - this.width / 2 - this.game.map.offsetX,
+      this.y - this.height / 2 - this.game.map.offsetY,
       this.width,
       this.height
     );
@@ -25,12 +25,8 @@ class Enemy {
   }
 
   move() {
-    let rad = (this.direction + 90) * (Math.PI / 180);
-    const x = Math.cos(rad);
-    const y = Math.sin(rad);
-
-    this.x -= x * this.speed;
-    this.y -= y * this.speed;
+    // this.x -= x * this.speed;
+    // this.y -= y * this.speed;
   }
 
   die() {
@@ -60,12 +56,16 @@ class Enemy {
 
     this.game.ctx.save();
     let rad = (this.direction * Math.PI) / 180;
-    this.game.ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+    this.game.ctx.translate(this.x, this.y);
     this.game.ctx.rotate(rad);
-    this.game.ctx.translate(
-      -(this.x + this.width / 2),
-      -(this.y + this.height / 2)
-    );
+    this.game.ctx.translate(-this.x, -this.y);
+  }
+
+  calculateDirection() {
+    let rad = (this.direction + 90) * (Math.PI / 180);
+    const x = Math.cos(rad);
+    const y = Math.sin(rad);
+    this.directionVector = { x, y };
   }
 
   shoot() {
@@ -74,10 +74,11 @@ class Enemy {
       Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 100
     ) {
       console.log('bang');
+      this.calculateDirection();
       const projectile = new Projectile(
         this.game,
-        this.x - this.game.map.offsetX - 10,
-        this.y - this.game.map.offsetY - 10,
+        this.x - this.game.map.offsetX - this.directionVector.x * 5,
+        this.y - this.game.map.offsetY - this.directionVector.y * 5,
         this.direction
       );
       this.game.projectiles.push(projectile);
