@@ -95,7 +95,6 @@ class Game {
 
     this.enemies.forEach((enemy) => {
       if (enemy.collide(this.player)) {
-        console.log('collide');
         if (!enemy.dead) {
           enemy.health -= 1;
           if (enemy.health <= 0) {
@@ -118,13 +117,13 @@ class Game {
             }
           }
         }
-        if (projectile.collide(this.player)) {
-          this.projectiles.splice(projectileIndex, 1);
-          this.player.health -= 5;
-          if (this.player.health <= 0) {
-            this.gameOver();
-          }
-        }
+        // if (projectile.collide(this.player)) {
+        //   this.projectiles.splice(projectileIndex, 1);
+        //   this.player.health -= 5;
+        //   if (this.player.health <= 0) {
+        //     this.gameOver();
+        //   }
+        // }
         if (this.map.collide(projectile)) {
           this.projectiles.splice(projectileIndex, 1);
         }

@@ -76,8 +76,8 @@ class Enemy {
       console.log('bang');
       const projectile = new Projectile(
         this.game,
-        this.x,
-        this.y,
+        this.x - this.game.map.offsetX - 10,
+        this.y - this.game.map.offsetY - 10,
         this.direction
       );
       this.game.projectiles.push(projectile);

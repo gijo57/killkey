@@ -127,8 +127,8 @@ class Player {
   shoot() {
     const projectile = new Projectile(
       this.game,
-      this.x + 50,
-      this.y + 50,
+      this.x,
+      this.y,
       this.direction
     );
     this.game.projectiles.push(projectile);

@@ -78,7 +78,6 @@ class Map {
           element.y - element.height / 2 <= y + this.tileSize / 2
         ) {
           if (this.map[j][i] === 1) {
-            console.log('collide');
             return true;
           }
           if (this.map[j][i] === 'D') {
