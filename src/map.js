@@ -90,10 +90,10 @@ class Map {
         }
 
         if (
-          element.x + element.width / 2 >= x - this.tileSize / 2 &&
-          element.x - element.width / 2 <= x + this.tileSize / 2 &&
-          element.y + element.height / 2 >= y - this.tileSize / 2 &&
-          element.y - element.height / 2 <= y + this.tileSize / 2
+          element.x + element.height / 2 >= x &&
+          element.x - element.height / 2 <= x + this.tileSize &&
+          element.y + element.height / 2 >= y &&
+          element.y - element.height / 2 <= y + this.tileSize
         ) {
           if (this.map[j][i] === 1) {
             return true;
