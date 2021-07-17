@@ -13,7 +13,12 @@ class Player {
 
   draw() {
     this.rotate();
-    this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.game.ctx.fillRect(
+      this.x - this.width / 2,
+      this.y - this.height / 2,
+      this.width,
+      this.height
+    );
     this.game.ctx.restore();
   }
 
