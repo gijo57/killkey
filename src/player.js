@@ -108,12 +108,9 @@ class Player {
     this.direction %= 360;
     this.game.ctx.save();
     let rad = (this.direction * Math.PI) / 180;
-    this.game.ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+    this.game.ctx.translate(this.x, this.y);
     this.game.ctx.rotate(rad);
-    this.game.ctx.translate(
-      -(this.x + this.width / 2),
-      -(this.y + this.height / 2)
-    );
+    this.game.ctx.translate(-this.x, -this.y);
   }
 
   run() {
