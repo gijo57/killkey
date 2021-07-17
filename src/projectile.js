@@ -14,14 +14,23 @@ class Projectile {
   }
 
   collide(element) {
+    let elementX, elementY;
+    if (element instanceof Player) {
+      elementX = element.x + this.game.map.offsetX;
+      elementY = element.y + this.game.map.offsetY;
+    } else {
+      elementX = element.x;
+      elementY = element.y;
+    }
+
     return (
-      element.x + element.width / 2 >=
+      elementX + element.width / 2 >=
         this.x + this.game.map.offsetX - this.width / 2 &&
-      element.x - element.width / 2 <=
+      elementX - element.width / 2 <=
         this.x + this.game.map.offsetX + this.width / 2 &&
-      element.y + element.height / 2 >=
+      elementY + element.height / 2 >=
         this.y + this.game.map.offsetY - this.height / 2 &&
-      element.y - element.height / 2 <=
+      elementY - element.height / 2 <=
         this.y + this.game.map.offsetY + this.height / 2
     );
   }

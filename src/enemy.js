@@ -70,13 +70,14 @@ class Enemy {
 
   shoot() {
     if (
-      Math.abs(this.game.player.x - this.x) < 10 &&
-      Math.abs(this.game.player.y - this.y) < 10
+      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 100 &&
+      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 100
     ) {
+      console.log('bang');
       const projectile = new Projectile(
         this.game,
         this.x,
-        this.y - 20,
+        this.y,
         this.direction
       );
       this.game.projectiles.push(projectile);

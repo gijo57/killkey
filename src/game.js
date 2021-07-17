@@ -120,7 +120,7 @@ class Game {
         }
         if (projectile.collide(this.player)) {
           this.projectiles.splice(projectileIndex, 1);
-          //this.player.health -= 5;
+          this.player.health -= 5;
           if (this.player.health <= 0) {
             this.gameOver();
           }
