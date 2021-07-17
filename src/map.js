@@ -42,14 +42,25 @@ class Map {
   }
 
   moveCamera() {
+    const previousPosition = { x: this.offsetX, y: this.offsetY };
     if (this.game.player.directionVector) {
       this.directionVector = {
         x: -this.game.player.directionVector.x,
         y: -this.game.player.directionVector.y
       };
 
-      this.offsetX += this.directionVector.x * this.game.player.speed; //FIX THIS
-      this.offsetY += this.directionVector.y * this.game.player.speed; //FIX THIS
+      const newPosition = {
+        x: this.offsetX + this.directionVector.x * this.game.player.speed,
+        y: this.offsetY + this.directionVector.y * this.game.player.speed
+      };
+
+      if (this.collide(this.game.player, newPosition.x, newPosition.y)) {
+        this.offsetX = previousPosition.x;
+        this.offsetY = previousPosition.y;
+      } else {
+        this.offsetX = newPosition.x;
+        this.offsetY = newPosition.y;
+      }
     }
   }
 
@@ -66,11 +77,11 @@ class Map {
     }
   }
 
-  collide(element) {
+  collide(element, newOffsetX, newOffsetY) {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        let x = 0 + i * this.tileSize - this.offsetX;
-        let y = 0 + j * this.tileSize - this.offsetY;
+        let x = 0 + i * this.tileSize - newOffsetX;
+        let y = 0 + j * this.tileSize - newOffsetY;
         if (
           element.x + element.width / 2 >= x - this.tileSize / 2 &&
           element.x - element.width / 2 <= x + this.tileSize / 2 &&
