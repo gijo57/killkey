@@ -64,11 +64,11 @@ class Player {
     this.game.ctx.translate(-this.x, -this.y);
   }
 
-  run() {
-    if (this.game.keyController.Shift.pressed) {
-      this.speed = 5;
-    }
-  }
+  // run() {
+  //   if (this.game.keyController.Shift.pressed) {
+  //     this.speed = 5;
+  //   }
+  // }
 
   calculateDirection() {
     let rad = (this.direction + 90) * (Math.PI / 180);
