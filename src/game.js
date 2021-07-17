@@ -4,20 +4,24 @@ class Game {
     this.ctx = canvas.getContext('2d');
     this.running = false;
     this.keyLocation = {};
+    this.enemyStartPositions = [];
   }
 
   start() {
     this.running = true;
     this.player = new Player(
       this,
-      CAMERA_PADDING_HORIZONTAL + 100,
+      CAMERA_PADDING_HORIZONTAL,
       CAMERA_PADDING_VERTICAL + 1
     );
     this.map = new Map(this);
     this.key = new Key(this);
     this.projectiles = [];
+    this.map.setEnemyStartPositions();
     this.enemies = [];
-    this.enemies.push(new Enemy(this, 400, 400));
+    this.enemyStartPositions.forEach((position) => {
+      this.enemies.push(new Enemy(this, position.x, position.y));
+    });
     this.setControls();
     this.update();
   }
@@ -39,8 +43,8 @@ class Game {
     });
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
-        enemy.move();
-        //enemy.shoot();
+        //enemy.move();
+        enemy.shoot();
       }
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
@@ -57,8 +61,8 @@ class Game {
       Space: { action: () => this.player.shoot() },
       ArrowUp: { pressed: false, action: () => this.player.move('forward') },
       ArrowDown: { pressed: false, action: () => this.player.move('backward') },
-      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 5) },
-      ArrowRight: { pressed: false, action: () => (this.player.direction += 5) }
+      ArrowLeft: { pressed: false, action: () => (this.player.direction -= 4) },
+      ArrowRight: { pressed: false, action: () => (this.player.direction += 4) }
     };
 
     window.addEventListener('keydown', (e) => {

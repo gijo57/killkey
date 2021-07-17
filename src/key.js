@@ -1,8 +1,8 @@
 class Key {
   constructor(game) {
     this.game = game;
-    this.width = 30;
-    this.height = 10;
+    this.width = 40;
+    this.height = 20;
   }
 
   draw() {

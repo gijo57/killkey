@@ -12,12 +12,17 @@ class Enemy {
   }
 
   draw() {
+    console.log('enemy', this.x, this.y);
     if (!this.dead) {
-      this.rotate();
+      //this.rotate();
     }
-    this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.game.ctx.fillRect(
+      this.x - this.game.map.offsetX,
+      this.y - this.game.map.offsetY,
+      this.width,
+      this.height
+    );
     this.game.ctx.restore();
-    this.direction++;
   }
 
   move() {
@@ -56,12 +61,21 @@ class Enemy {
   }
 
   shoot() {
-    const projectile = new Projectile(
-      this.game,
-      this.x - 50,
-      this.y - 50,
-      this.direction
-    );
-    this.game.projectiles.push(projectile);
+    // console.log(
+    //   Math.abs(this.game.player.x - this.x),
+    // //   Math.abs(this.game.player.y - this.y)
+    // );
+    if (
+      Math.abs(this.game.player.x - this.x) < 10 &&
+      Math.abs(this.game.player.y - this.y) < 10
+    ) {
+      const projectile = new Projectile(
+        this.game,
+        this.x,
+        this.y - 20,
+        this.direction
+      );
+      this.game.projectiles.push(projectile);
+    }
   }
 }

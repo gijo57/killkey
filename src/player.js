@@ -7,7 +7,7 @@ class Player {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 1;
+    this.speed = 0.6;
     this.hasKey = false;
   }
 
@@ -27,11 +27,7 @@ class Player {
   }
 
   move(direction) {
-    let rad = (this.direction + 90) * (Math.PI / 180);
-    const x = Math.cos(rad);
-    const y = Math.sin(rad);
-    this.directionVector = { x, y };
-
+    this.calculateDirection();
     this.game.map.collide(this);
 
     if (direction === 'forward') {
@@ -90,6 +86,13 @@ class Player {
     if (this.game.keyController.Shift.pressed) {
       this.speed = 5;
     }
+  }
+
+  calculateDirection() {
+    let rad = (this.direction + 90) * (Math.PI / 180);
+    const x = Math.cos(rad);
+    const y = Math.sin(rad);
+    this.directionVector = { x, y };
   }
 
   shoot() {

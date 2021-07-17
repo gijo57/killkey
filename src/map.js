@@ -53,6 +53,19 @@ class Map {
     }
   }
 
+  setEnemyStartPositions() {
+    for (let i = 0; i < this.horizontalTileCount; i++) {
+      for (let j = 0; j < this.verticalTileCount; j++) {
+        if (this.map[j][i] === 'E') {
+          this.game.enemyStartPositions.push({
+            x: 0 + i * this.tileSize - this.offsetX,
+            y: 0 + j * this.tileSize - this.offsetY
+          });
+        }
+      }
+    }
+  }
+
   collide(element) {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
