@@ -15,10 +15,14 @@ class Projectile {
 
   collide(element) {
     return (
-      element.x + element.width / 2 >= this.x - this.width / 2 &&
-      element.x - element.width / 2 <= this.x + this.width / 2 &&
-      element.y + element.height / 2 >= this.y - this.height / 2 &&
-      element.y - element.height / 2 <= this.y + this.height / 2
+      element.x + element.width / 2 >=
+        this.x + this.game.map.offsetX - this.width / 2 &&
+      element.x - element.width / 2 <=
+        this.x + this.game.map.offsetX + this.width / 2 &&
+      element.y + element.height / 2 >=
+        this.y + this.game.map.offsetY - this.height / 2 &&
+      element.y - element.height / 2 <=
+        this.y + this.game.map.offsetY + this.height / 2
     );
   }
 

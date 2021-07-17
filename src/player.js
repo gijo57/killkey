@@ -65,8 +65,37 @@ class Player {
     }
 
     if (direction === 'backward') {
-      this.x += this.directionVector.x * this.speed;
-      this.y += this.directionVector.y * this.speed;
+      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera();
+      }
+
+      if (this.x > CAMERA_PADDING_HORIZONTAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.x = CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera();
+      }
+
+      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera();
+      }
+
+      if (this.y > CAMERA_PADDING_VERTICAL) {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      } else {
+        this.y = CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera();
+      }
     }
   }
 

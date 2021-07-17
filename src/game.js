@@ -95,6 +95,7 @@ class Game {
 
     this.enemies.forEach((enemy) => {
       if (enemy.collide(this.player)) {
+        console.log('collide');
         if (!enemy.dead) {
           enemy.health -= 1;
           if (enemy.health <= 0) {

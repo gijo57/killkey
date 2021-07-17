@@ -12,7 +12,6 @@ class Enemy {
   }
 
   draw() {
-    console.log('enemy', this.x, this.y);
     if (!this.dead) {
       //this.rotate();
     }
@@ -39,11 +38,20 @@ class Enemy {
   }
 
   collide(element) {
+    let elementX, elementY;
+    if (element instanceof Player) {
+      elementX = element.x + this.game.map.offsetX;
+      elementY = element.y + this.game.map.offsetY;
+    } else {
+      elementX = element.x;
+      elementY = element.y;
+    }
+
     return (
-      element.x + element.width / 2 >= this.x - this.width / 2 &&
-      element.x - element.width / 2 <= this.x + this.width / 2 &&
-      element.y + element.height / 2 >= this.y - this.height / 2 &&
-      element.y - element.height / 2 <= this.y + this.height / 2
+      elementX + element.width / 2 >= this.x - this.width / 2 &&
+      elementX - element.width / 2 <= this.x + this.width / 2 &&
+      elementY + element.height / 2 >= this.y - this.height / 2 &&
+      elementY - element.height / 2 <= this.y + this.height / 2
     );
   }
 
@@ -61,10 +69,6 @@ class Enemy {
   }
 
   shoot() {
-    // console.log(
-    //   Math.abs(this.game.player.x - this.x),
-    // //   Math.abs(this.game.player.y - this.y)
-    // );
     if (
       Math.abs(this.game.player.x - this.x) < 10 &&
       Math.abs(this.game.player.y - this.y) < 10
