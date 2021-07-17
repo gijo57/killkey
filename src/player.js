@@ -7,7 +7,7 @@ class Player {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 0.6;
+    this.speed = 3;
     this.hasKey = false;
   }
 
@@ -36,70 +36,21 @@ class Player {
     this.game.map.collide(this);
 
     if (direction === 'forward') {
-      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
+      if (this.x >= this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
         this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
         this.game.map.moveCamera();
-      }
-
-      if (this.x > CAMERA_PADDING_HORIZONTAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
+      } else if (this.x <= CAMERA_PADDING_HORIZONTAL) {
         this.x = CAMERA_PADDING_HORIZONTAL;
         this.game.map.moveCamera();
-      }
-
-      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
+      } else if (this.y >= this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
         this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
         this.game.map.moveCamera();
-      }
-
-      if (this.y > CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
+      } else if (this.y <= CAMERA_PADDING_VERTICAL) {
         this.y = CAMERA_PADDING_VERTICAL;
         this.game.map.moveCamera();
-      }
-    }
-
-    if (direction === 'backward') {
-      if (this.x < this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
+      } else {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
-      }
-
-      if (this.x > CAMERA_PADDING_HORIZONTAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.x = CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
-      }
-
-      if (this.y < this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
-      }
-
-      if (this.y > CAMERA_PADDING_VERTICAL) {
-        this.x -= this.directionVector.x * this.speed;
-        this.y -= this.directionVector.y * this.speed;
-      } else {
-        this.y = CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
       }
     }
   }

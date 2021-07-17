@@ -48,8 +48,8 @@ class Map {
         y: -this.game.player.directionVector.y
       };
 
-      this.offsetX += this.directionVector.x * this.game.player.speed * 3; //FIX THIS
-      this.offsetY += this.directionVector.y * this.game.player.speed * 3; //FIX THIS
+      this.offsetX += this.directionVector.x * this.game.player.speed; //FIX THIS
+      this.offsetY += this.directionVector.y * this.game.player.speed; //FIX THIS
     }
   }
 
