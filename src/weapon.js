@@ -13,12 +13,27 @@ class Weapon {
       const x = this.owner.x - this.owner.directionVector.x * 20;
       const y = this.owner.y - this.owner.directionVector.y * 20;
 
-      const projectile = new Projectile(
-        this.owner.game,
-        x,
-        y,
-        this.owner.direction
-      );
+      let projectile;
+      if (this.owner instanceof Player) {
+        projectile = new Projectile(
+          this.owner.game,
+          x,
+          y,
+          this.owner.direction
+        );
+      } else {
+        projectile = new Projectile(
+          this.owner.game,
+          this.owner.x -
+            this.owner.game.map.offsetX -
+            this.owner.directionVector.x * 5,
+          this.owner.y -
+            this.owner.game.map.offsetY -
+            this.owner.directionVector.y * 5,
+          this.owner.direction
+        );
+      }
+
       this.owner.game.projectiles.push(projectile);
       this.lastShot = currentShot;
     }

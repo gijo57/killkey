@@ -9,7 +9,7 @@ class Enemy {
     this.direction = 0;
     this.speed = 1;
     this.dead = false;
-    this.weapon = new Weapon();
+    this.weapon = new Weapon(this);
   }
 
   draw() {
@@ -74,14 +74,7 @@ class Enemy {
       Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 100 &&
       Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 100
     ) {
-      this.calculateDirection();
-      const projectile = new Projectile(
-        this.game,
-        this.x - this.game.map.offsetX - this.directionVector.x * 5,
-        this.y - this.game.map.offsetY - this.directionVector.y * 5,
-        this.direction
-      );
-      this.game.projectiles.push(projectile);
+      this.weapon.shoot();
     }
   }
 }
