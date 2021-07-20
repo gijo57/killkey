@@ -1,18 +1,25 @@
+const keyImage = new Image();
+keyImage.src = 'images/key.png';
+
 class Key {
   constructor(game) {
     this.game = game;
-    this.width = 40;
-    this.height = 20;
+    this.width = 20;
+    this.height = 40;
   }
 
   draw() {
     this.game.ctx.save();
-    this.game.ctx.fillStyle = 'red';
-    this.game.ctx.font = '20px Arial';
-    this.game.ctx.fillText(
-      'KEY',
+    this.game.ctx.drawImage(
+      keyImage,
+      0,
+      0,
+      30,
+      65,
       this.game.keyLocation.x,
-      this.game.keyLocation.y
+      this.game.keyLocation.y,
+      this.width,
+      this.height
     );
     this.game.ctx.restore();
   }

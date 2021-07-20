@@ -1,3 +1,7 @@
+const textureImage = new Image();
+textureImage.src = 'images/textures.png';
+const doorImage = new Image();
+doorImage.src = 'images/door.png';
 class Map {
   constructor(game) {
     this.game = game;
@@ -14,17 +18,55 @@ class Map {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
         if (this.map[j][i] === 1) {
-          this.game.ctx.fillStyle = 'black';
-          this.drawTile(i, j);
+          this.game.ctx.drawImage(
+            textureImage,
+            3 * this.tileSize,
+            2.5 * this.tileSize,
+            24,
+            24,
+            0 + i * this.tileSize - this.offsetX,
+            0 + j * this.tileSize - this.offsetY,
+            this.tileSize,
+            this.tileSize
+          );
         } else {
-          this.game.ctx.fillStyle = 'grey';
-          this.drawTile(i, j);
+          this.game.ctx.drawImage(
+            textureImage,
+            1.5 * this.tileSize,
+            0,
+            24,
+            24,
+            0 + i * this.tileSize - this.offsetX,
+            0 + j * this.tileSize - this.offsetY,
+            this.tileSize,
+            this.tileSize
+          );
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
             this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
           } else if (this.map[j][i] === 'D') {
-            this.game.ctx.fillStyle = 'brown';
-            this.drawTile(i, j);
+            this.game.ctx.drawImage(
+              textureImage,
+              3 * this.tileSize,
+              2.5 * this.tileSize,
+              24,
+              24,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
+            this.game.ctx.drawImage(
+              doorImage,
+              0,
+              0,
+              30,
+              30,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
           }
         }
       }

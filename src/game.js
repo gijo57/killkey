@@ -16,6 +16,7 @@ class Game {
     );
     this.map = new Map(this);
     this.key = new Key(this);
+    this.info = new Info(this, this.player.health);
     this.projectiles = [];
     this.map.setEnemyStartPositions();
     this.enemies = [];
@@ -35,6 +36,7 @@ class Game {
     this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
     this.projectiles.forEach((projectile) => projectile.draw());
+    this.info.draw(this.player.health);
   }
 
   runLogic() {
@@ -117,13 +119,13 @@ class Game {
             }
           }
         }
-        // if (projectile.collide(this.player)) {
-        //   this.projectiles.splice(projectileIndex, 1);
-        //   this.player.health -= 5;
-        //   if (this.player.health <= 0) {
-        //     this.gameOver();
-        //   }
-        // }
+        if (projectile.collide(this.player)) {
+          this.projectiles.splice(projectileIndex, 1);
+          this.player.health -= 5;
+          if (this.player.health <= 0) {
+            this.gameOver();
+          }
+        }
         if (this.map.collide(projectile)) {
           this.projectiles.splice(projectileIndex, 1);
         }

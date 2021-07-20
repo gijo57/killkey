@@ -73,7 +73,6 @@ class Enemy {
       Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 100 &&
       Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 100
     ) {
-      console.log('bang');
       this.calculateDirection();
       const projectile = new Projectile(
         this.game,
