@@ -72,7 +72,6 @@ class Player {
   // }
 
   calculateDirection() {
-    console.log('hi');
     let rad = (this.direction + 90) * (Math.PI / 180);
     const x = Math.cos(rad);
     const y = Math.sin(rad);
@@ -80,11 +79,6 @@ class Player {
   }
 
   shoot() {
-    // this.calculateDirection();
-    // const x = this.x - this.directionVector.x * 20;
-    // const y = this.y - this.directionVector.y * 20;
-    // const projectile = new Projectile(this.game, x, y, this.direction);
-    // this.game.projectiles.push(projectile);
     this.weapon.shoot();
   }
 }

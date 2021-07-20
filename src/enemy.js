@@ -9,6 +9,7 @@ class Enemy {
     this.direction = 0;
     this.speed = 1;
     this.dead = false;
+    this.weapon = new Weapon();
   }
 
   draw() {
