@@ -6,7 +6,18 @@
 }
 
 #start {
+  padding: 50px;
+  font-family: 'bloodlust expanded';
+  color: darkred;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: black;
+}
+
+#start h1 {
+  margin: 0;
+  font-size: 200px;
 }
 
 #game {
