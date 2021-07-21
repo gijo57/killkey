@@ -34,7 +34,6 @@ class Player {
 
   move(direction) {
     this.calculateDirection();
-    this.game.map.collide(this);
 
     if (direction === 'forward') {
       if (this.x >= this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {

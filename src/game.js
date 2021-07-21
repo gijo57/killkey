@@ -52,7 +52,7 @@ class Game {
     });
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
-        //enemy.move();
+        enemy.move();
         enemy.shoot();
       }
     });

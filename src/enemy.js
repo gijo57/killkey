@@ -26,8 +26,10 @@ class Enemy {
   }
 
   move() {
-    // this.x -= x * this.speed;
-    // this.y -= y * this.speed;
+    this.calculateDirection();
+    this.game.map.collide(this);
+    this.x -= x * this.speed;
+    this.y -= y * this.speed;
   }
 
   die() {
