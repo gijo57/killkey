@@ -123,7 +123,7 @@ class Map {
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
         let x, y;
-        if (!(element instanceof Projectile)) {
+        if (!(element instanceof Projectile) && !(element instanceof Enemy)) {
           x = 0 + i * this.tileSize - newOffsetX;
           y = 0 + j * this.tileSize - newOffsetY;
         } else {

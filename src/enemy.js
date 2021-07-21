@@ -27,9 +27,11 @@ class Enemy {
 
   move() {
     this.calculateDirection();
-    this.game.map.collide(this);
-    this.x -= x * this.speed;
-    this.y -= y * this.speed;
+
+    if (!this.game.map.collide(this)) {
+      this.x = this.x - this.directionVector.x * this.speed;
+      this.y = this.y - this.directionVector.y * this.speed;
+    }
   }
 
   die() {
