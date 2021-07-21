@@ -1,3 +1,7 @@
+body {
+  font-family: 'bloodlust expanded';
+}
+
 .screen {
   margin: 50px auto;
   border: 1px solid red;
@@ -7,7 +11,6 @@
 
 #start {
   padding: 50px;
-  font-family: 'bloodlust expanded';
   color: darkred;
   display: flex;
   flex-direction: column;
@@ -26,4 +29,20 @@
 
 #game-over {
   display: none;
+}
+
+button {
+  font-family: 'bloodlust expanded';
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  color: black;
+  background-color: darkred;
+}
+
+#maps {
+  font-size: 50px;
+  height: 200px;
+  width: 80%;
+  display: flex;
 }
