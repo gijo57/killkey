@@ -6,11 +6,11 @@
 }
 
 #start {
-  display: none;
+  display: flex;
 }
 
 #game {
-  /*display: none;*/
+  display: none;
 }
 
 #game-over {

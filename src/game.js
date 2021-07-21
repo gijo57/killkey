@@ -1,6 +1,8 @@
 class Game {
-  constructor(canvas) {
+  constructor(canvas, screens, tryAgainBtn) {
     this.canvas = canvas;
+    this.tryAgainBtn = tryAgainBtn;
+    this.screens = screens;
     this.ctx = canvas.getContext('2d');
     this.running = false;
     this.keyLocation = {};
@@ -25,6 +27,11 @@ class Game {
     });
     this.setControls();
     this.update();
+    this.displayScreen('gameScreen');
+
+    this.tryAgainBtn.addEventListener('click', () => {
+      this.displayScreen('startScreen');
+    });
   }
 
   draw() {
@@ -55,6 +62,15 @@ class Game {
 
   clear() {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  displayScreen(screenName) {
+    const currentlyDisplayed = this.screens[screenName];
+    const notDisplayed = Object.values(this.screens).filter(
+      (screen) => screen !== currentlyDisplayed
+    );
+    currentlyDisplayed.style.display = 'flex';
+    notDisplayed.forEach((screen) => (screen.style.display = 'none'));
   }
 
   setControls() {
@@ -135,7 +151,7 @@ class Game {
 
   gameOver() {
     this.running = false;
-    console.log('GAME OVER!');
+    this.displayScreen('gameOverScreen');
   }
 
   passLevel() {
