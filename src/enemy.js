@@ -8,15 +8,14 @@ class Enemy {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 1;
+    this.speed = 0.5;
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
-    this.maxDistance = 300;
+    this.maxDistance = 200;
   }
 
   draw() {
-    // console.log('e', this.x, this.y);
     this.rotate();
     this.game.ctx.fillRect(
       this.x - this.width / 2 - this.game.map.offsetX,
@@ -40,15 +39,14 @@ class Enemy {
       this.y,
       this.startPosition.y
     );
-
+    this.calculateDirection();
     if (this.playerDistance < 400) {
       this.walk = true;
     }
-
+    console.log(this.walk, this.maxDistance);
     if (this.walk && this.distance < this.maxDistance) {
-      this.calculateDirection();
-
       if (!this.game.map.collide(this)) {
+        console.log(this.directionVector.x, this.directionVector.y);
         this.x = this.x - this.directionVector.x * this.speed;
         this.y = this.y - this.directionVector.y * this.speed;
       }
@@ -95,17 +93,18 @@ class Enemy {
   }
 
   calculateDirection() {
-    let rad = (this.direction + 90) * (Math.PI / 180);
-    const x = Math.cos(rad);
-    const y = Math.sin(rad);
+    // let rad = (this.direction + 90) * (Math.PI / 180);
+    // const x = Math.cos(rad);
+    // const y = Math.sin(rad);
+    const magnitude = this.playerDistance;
+    const x = (this.x - this.game.player.x + this.game.map.offsetX) / magnitude;
+    const y = (this.y - this.game.player.y + this.game.map.offsetY) / magnitude;
+
     this.directionVector = { x, y };
   }
 
   shoot() {
-    if (
-      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 300 &&
-      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 300
-    ) {
+    if (this.playerDistance < 200) {
       this.weapon.shoot();
     }
   }
