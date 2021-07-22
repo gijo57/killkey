@@ -10,12 +10,11 @@ class Enemy {
     this.speed = 1;
     this.dead = false;
     this.weapon = new Weapon(this);
+    this.walk = false;
   }
 
   draw() {
-    if (!this.dead) {
-      this.rotate();
-    }
+    this.rotate();
     this.game.ctx.fillRect(
       this.x - this.width / 2 - this.game.map.offsetX,
       this.y - this.height / 2 - this.game.map.offsetY,
@@ -26,11 +25,19 @@ class Enemy {
   }
 
   move() {
-    this.calculateDirection();
+    if (
+      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 300 &&
+      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 300
+    ) {
+      this.walk = true;
+    }
+    if (this.walk) {
+      this.calculateDirection();
 
-    if (!this.game.map.collide(this)) {
-      this.x = this.x - this.directionVector.x * this.speed;
-      this.y = this.y - this.directionVector.y * this.speed;
+      if (!this.game.map.collide(this)) {
+        this.x = this.x - this.directionVector.x * this.speed;
+        this.y = this.y - this.directionVector.y * this.speed;
+      }
     }
   }
 
@@ -64,6 +71,7 @@ class Enemy {
     this.game.ctx.translate(this.x, this.y);
     this.game.ctx.rotate(rad);
     this.game.ctx.translate(-this.x, -this.y);
+    this.game.ctx.restore();
   }
 
   calculateDirection() {
