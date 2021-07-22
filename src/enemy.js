@@ -90,6 +90,7 @@ class Enemy {
         180) /
         Math.PI +
       90;
+
     this.direction %= 360;
 
     this.game.ctx.save();
