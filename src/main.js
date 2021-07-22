@@ -6,7 +6,6 @@ let mapNumber = 1;
 for (let i = 0; i < mapList.length; i++) {
   mapList[i].addEventListener('click', (e) => {
     mapNumber = Number(e.target.id);
-    document.querySelector('h1').innerHTML = mapNumber;
   });
 }
 

@@ -16,7 +16,9 @@ class Enemy {
   }
 
   draw() {
-    this.rotate();
+    if (!this.dead) {
+      this.rotate();
+    }
     this.game.ctx.fillRect(
       this.x - this.width / 2 - this.game.map.offsetX,
       this.y - this.height / 2 - this.game.map.offsetY,

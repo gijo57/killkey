@@ -9,7 +9,8 @@ body {
   height: 600px;
 }
 
-#start {
+#start,
+#game-over {
   padding: 50px;
   color: darkred;
   display: flex;
@@ -21,6 +22,11 @@ body {
 #start h1 {
   margin: 0;
   font-size: 200px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 50px;
 }
 
 #game {
@@ -41,8 +47,17 @@ button {
 }
 
 #maps {
-  font-size: 50px;
-  height: 200px;
+  margin: 50px;
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+#maplist {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
   display: flex;
 }

@@ -12,11 +12,13 @@
   <body>
     <div class="screen" id="start">
       <h1>K I L L K E Y</h1>
-      <h2 id="chosen-map"></h2>
       <div id="maps">
-        <ol>
-          <li id="1">Map 1</li>
-        </ol>
+        <h2>Maps</h2>
+        <div id="maplist">
+          <ol>
+            <li id="1">Map 1</li>
+          </ol>
+        </div>
       </div>
       <button id="btn-start">Start Game</button>
     </div>
@@ -24,6 +26,7 @@
       <canvas width="1000" height="600"> </canvas>
     </div>
     <div class="screen" id="game-over">
+      <h1>GAME OVER!</h1>
       <button id="btn-again">Try Again</button>
     </div>
     <script src="src/projectile.js"></script>
