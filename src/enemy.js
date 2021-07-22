@@ -12,7 +12,7 @@ class Enemy {
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
-    this.maxDistance = 200;
+    this.maxDistance = 300;
   }
 
   draw() {
@@ -76,6 +76,14 @@ class Enemy {
   }
 
   rotate() {
+    this.direction =
+      (Math.atan2(
+        this.game.player.y + this.game.map.offsetY - this.y,
+        this.game.player.x + this.game.map.offsetX - this.x
+      ) *
+        180) /
+        Math.PI +
+      90;
     this.direction %= 360;
 
     this.game.ctx.save();
@@ -98,23 +106,16 @@ class Enemy {
   }
 
   calculateDirection() {
-    // let rad = (this.direction + 90) * (Math.PI / 180);
-    // const x = Math.cos(rad);
-    // const y = Math.sin(rad);
-    const magnitude = this.playerDistance;
-    const x = (this.x - this.game.player.x + this.game.map.offsetX) / magnitude;
-    const y = (this.y - this.game.player.y + this.game.map.offsetY) / magnitude;
+    let rad = (this.direction + 90) * (Math.PI / 180);
+
+    const x = Math.cos(rad);
+    const y = Math.sin(rad);
 
     this.directionVector = { x, y };
-    this.direction =
-      (180 * Math.atan2(this.directionVector.x, this.directionVector.y)) /
-        Math.PI +
-      90;
-    console.log(this.direction);
   }
 
   shoot() {
-    if (this.playerDistance < 200) {
+    if (this.playerDistance < 300) {
       this.weapon.shoot();
     }
   }
