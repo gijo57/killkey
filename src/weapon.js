@@ -26,10 +26,10 @@ class Weapon {
           this.owner.game,
           this.owner.x -
             this.owner.game.map.offsetX -
-            this.owner.directionVector.x * 10,
+            this.owner.directionVector.x * 15,
           this.owner.y -
             this.owner.game.map.offsetY -
-            this.owner.directionVector.y * 10,
+            this.owner.directionVector.y * 15,
           this.owner.direction
         );
       }

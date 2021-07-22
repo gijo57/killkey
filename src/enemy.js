@@ -44,6 +44,10 @@ class Enemy {
       this.walk = true;
     }
 
+    if (this.playerDistance < 200) {
+      this.walk = false;
+    }
+
     if (this.walk) {
       if (!this.game.map.collide(this) && this.distance < this.maxDistance) {
         this.calculateDirection();
