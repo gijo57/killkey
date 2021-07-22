@@ -33,7 +33,9 @@ const screens = { startScreen, gameScreen, gameOverScreen };
 const game = new Game(canvas, screens, tryAgainButton);
 
 startButton.addEventListener('click', () => {
-  game.start();
+  if (mapNumber) {
+    game.start();
+  }
 });
 
 mapButton.addEventListener('click', () => {
