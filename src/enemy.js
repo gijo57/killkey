@@ -8,7 +8,7 @@ class Enemy {
     this.width = 40;
     this.height = 20;
     this.direction = 0;
-    this.speed = 0.5;
+    this.speed = 1;
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
@@ -39,14 +39,14 @@ class Enemy {
       this.y,
       this.startPosition.y
     );
-    this.calculateDirection();
+
     if (this.playerDistance < 400) {
       this.walk = true;
     }
-    console.log(this.walk, this.maxDistance);
-    if (this.walk && this.distance < this.maxDistance) {
-      if (!this.game.map.collide(this)) {
-        console.log(this.directionVector.x, this.directionVector.y);
+
+    if (this.walk) {
+      if (!this.game.map.collide(this) && this.distance < this.maxDistance) {
+        this.calculateDirection();
         this.x = this.x - this.directionVector.x * this.speed;
         this.y = this.y - this.directionVector.y * this.speed;
       }
@@ -80,10 +80,15 @@ class Enemy {
 
     this.game.ctx.save();
     let rad = (this.direction * Math.PI) / 180;
-    this.game.ctx.translate(this.x, this.y);
+    this.game.ctx.translate(
+      this.x - this.game.map.offsetX,
+      this.y - this.game.map.offsetY
+    );
     this.game.ctx.rotate(rad);
-    this.game.ctx.translate(-this.x, -this.y);
-    this.game.ctx.restore();
+    this.game.ctx.translate(
+      -this.x + this.game.map.offsetX,
+      -this.y + this.game.map.offsetY
+    );
   }
 
   calculateDistance(x, refX, y, refY) {
@@ -101,6 +106,11 @@ class Enemy {
     const y = (this.y - this.game.player.y + this.game.map.offsetY) / magnitude;
 
     this.directionVector = { x, y };
+    this.direction =
+      (180 * Math.atan2(this.directionVector.x, this.directionVector.y)) /
+        Math.PI +
+      90;
+    console.log(this.direction);
   }
 
   shoot() {
