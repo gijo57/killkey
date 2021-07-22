@@ -120,8 +120,6 @@ class Map {
   }
 
   collide(element, newOffsetX, newOffsetY) {
-    console.log('x', this.offsetX, element.x);
-    console.log('y', this.offsetY, element.y);
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
         let x, y;
