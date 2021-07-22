@@ -13,6 +13,11 @@ class Player {
   }
 
   draw() {
+    // console.log(
+    //   'p',
+    //   this.x + this.game.map.offsetX,
+    //   this.y + this.game.map.offsetY
+    // );
     this.rotate();
     this.game.ctx.fillRect(
       this.x - this.width / 2,

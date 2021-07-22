@@ -2,6 +2,7 @@ class Enemy {
   constructor(game, x, y) {
     this.game = game;
     this.health = 50;
+    this.startPosition = { x, y };
     this.x = x;
     this.y = y;
     this.width = 40;
@@ -11,9 +12,11 @@ class Enemy {
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
+    this.maxDistance = 300;
   }
 
   draw() {
+    // console.log('e', this.x, this.y);
     this.rotate();
     this.game.ctx.fillRect(
       this.x - this.width / 2 - this.game.map.offsetX,
@@ -25,13 +28,24 @@ class Enemy {
   }
 
   move() {
-    if (
-      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 300 &&
-      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 300
-    ) {
+    this.playerDistance = this.calculateDistance(
+      this.x,
+      this.game.player.x + this.game.map.offsetX,
+      this.y,
+      this.game.player.y + this.game.map.offsetY
+    );
+    this.distance = this.calculateDistance(
+      this.x,
+      this.startPosition.x,
+      this.y,
+      this.startPosition.y
+    );
+
+    if (this.playerDistance < 400) {
       this.walk = true;
     }
-    if (this.walk) {
+
+    if (this.walk && this.distance < this.maxDistance) {
       this.calculateDirection();
 
       if (!this.game.map.collide(this)) {
@@ -74,6 +88,12 @@ class Enemy {
     this.game.ctx.restore();
   }
 
+  calculateDistance(x, refX, y, refY) {
+    const a = x - refX;
+    const b = y - refY;
+    return Math.sqrt(a * a + b * b);
+  }
+
   calculateDirection() {
     let rad = (this.direction + 90) * (Math.PI / 180);
     const x = Math.cos(rad);
@@ -83,8 +103,8 @@ class Enemy {
 
   shoot() {
     if (
-      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 100 &&
-      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 100
+      Math.abs(this.game.player.x + this.game.map.offsetX - this.x) < 300 &&
+      Math.abs(this.game.player.y + this.game.map.offsetY - this.y) < 300
     ) {
       this.weapon.shoot();
     }
