@@ -13,6 +13,7 @@ class Enemy {
     this.weapon = new Weapon(this);
     this.walk = false;
     this.maxDistance = 300;
+    this.returnToStart = false;
   }
 
   draw() {
@@ -42,12 +43,17 @@ class Enemy {
       this.startPosition.y
     );
 
-    if (this.x === this.startPosition.x && this.y === this.startPosition.y) {
+    if (
+      Math.abs(this.x - this.startPosition.x) < 5 &&
+      Math.abs(this.y === this.startPosition.y) < 5
+    ) {
       this.walk = false;
+      this.returnToStart = false;
     }
 
     if (this.playerDistance < 400) {
       this.walk = true;
+      this.returnToStart = false;
     }
 
     if (this.playerDistance < 200) {
@@ -55,7 +61,10 @@ class Enemy {
     }
 
     if (this.walk) {
-      if (!this.game.map.collide(this) && this.distance < this.maxDistance) {
+      if (
+        (!this.game.map.collide(this) && this.distance < this.maxDistance) ||
+        this.returnToStart
+      ) {
         this.calculateDirection();
         this.x = this.x - this.directionVector.x * this.speed;
         this.y = this.y - this.directionVector.y * this.speed;
@@ -66,7 +75,9 @@ class Enemy {
       (this.playerDistance > 400 && this.distance >= this.maxDistance) ||
       this.game.map.collide(this)
     ) {
-      console.log(this.walk, 'hi');
+      this.returnToStart = true;
+    } else if (true) {
+      //this.returnToStart = false;
     }
   }
 
@@ -93,14 +104,25 @@ class Enemy {
   }
 
   rotate() {
-    this.direction =
-      (Math.atan2(
-        this.game.player.y + this.game.map.offsetY - this.y,
-        this.game.player.x + this.game.map.offsetX - this.x
-      ) *
-        180) /
-        Math.PI +
-      90;
+    if (!this.returnToStart) {
+      this.direction =
+        (Math.atan2(
+          this.game.player.y + this.game.map.offsetY - this.y,
+          this.game.player.x + this.game.map.offsetX - this.x
+        ) *
+          180) /
+          Math.PI +
+        90;
+    } else {
+      this.direction =
+        (Math.atan2(
+          this.startPosition.y - this.y,
+          this.startPosition.x - this.x
+        ) *
+          180) /
+          Math.PI +
+        90;
+    }
 
     this.direction %= 360;
 
