@@ -2,6 +2,8 @@ const enemyImgA = new Image();
 enemyImgA.src = 'images/Player2-A.png';
 const enemyImgB = new Image();
 enemyImgB.src = 'images/Player2-B.png';
+const bloodImg = new Image();
+bloodImg.src = 'images/blood.png';
 
 class Enemy {
   constructor(game, x, y) {
@@ -24,17 +26,22 @@ class Enemy {
 
   draw() {
     let enemyImg;
-    if (this.walk) {
-      if (this.frame < 15) {
-        enemyImg = enemyImgA;
+
+    if (!this.dead) {
+      if (this.walk) {
+        if (this.frame < 15) {
+          enemyImg = enemyImgA;
+        } else {
+          enemyImg = enemyImgB;
+        }
       } else {
         enemyImg = enemyImgB;
       }
+      this.rotate();
     } else {
-      enemyImg = enemyImgB;
+      enemyImg = bloodImg;
     }
 
-    this.rotate();
     this.game.ctx.drawImage(
       enemyImg,
       this.x - this.width / 2 - this.game.map.offsetX,
