@@ -1,7 +1,8 @@
 const textureImage = new Image();
-textureImage.src = 'images/textures.png';
+
 const doorImage = new Image();
 doorImage.src = 'images/door.png';
+
 class Map {
   constructor(game) {
     this.game = game;
@@ -11,6 +12,7 @@ class Map {
     this.offsetY = 0;
     this.horizontalTileCount = maps[mapNumber - 1][0].length;
     this.verticalTileCount = maps[mapNumber - 1].length;
+    textureImage.src = mapTextureSources[mapNumber].src;
   }
 
   draw() {
@@ -20,26 +22,26 @@ class Map {
         if (this.map[j][i] === 1) {
           this.game.ctx.drawImage(
             textureImage,
-            3 * this.tileSize,
-            2.5 * this.tileSize,
-            22,
-            22,
+            mapTextureSources[mapNumber].sxWall,
+            mapTextureSources[mapNumber].syWall,
+            mapTextureSources[mapNumber].swidthWall,
+            mapTextureSources[mapNumber].sheightWall,
             0 + i * this.tileSize - this.offsetX,
             0 + j * this.tileSize - this.offsetY,
-            this.tileSize + 2,
-            this.tileSize + 2
+            mapTextureSources[mapNumber].widthWall,
+            mapTextureSources[mapNumber].heightWall
           );
         } else {
           this.game.ctx.drawImage(
             textureImage,
-            1.5 * this.tileSize,
-            0,
-            22,
-            22,
+            mapTextureSources[mapNumber].sxFloor,
+            mapTextureSources[mapNumber].syFloor,
+            mapTextureSources[mapNumber].swidthFloor,
+            mapTextureSources[mapNumber].sheightFloor,
             0 + i * this.tileSize - this.offsetX,
             0 + j * this.tileSize - this.offsetY,
-            this.tileSize + 1,
-            this.tileSize + 1
+            mapTextureSources[mapNumber].widthFloor,
+            mapTextureSources[mapNumber].heightFloor
           );
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
@@ -47,14 +49,14 @@ class Map {
           } else if (this.map[j][i] === 'D') {
             this.game.ctx.drawImage(
               textureImage,
-              3 * this.tileSize,
-              2.5 * this.tileSize,
-              24,
-              24,
+              mapTextureSources[mapNumber].sxWall,
+              mapTextureSources[mapNumber].syWall,
+              mapTextureSources[mapNumber].swidthWall,
+              mapTextureSources[mapNumber].sheightWall,
               0 + i * this.tileSize - this.offsetX,
               0 + j * this.tileSize - this.offsetY,
-              this.tileSize,
-              this.tileSize
+              mapTextureSources[mapNumber].widthWall,
+              mapTextureSources[mapNumber].heightWall
             );
             this.game.ctx.drawImage(
               doorImage,

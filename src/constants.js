@@ -2,3 +2,36 @@ const TILE_SIZE = 48;
 
 const CAMERA_PADDING_VERTICAL = 300;
 const CAMERA_PADDING_HORIZONTAL = 500;
+
+const mapTextureSources = {
+  1: {
+    src: 'images/textures.png',
+    sxWall: 3 * TILE_SIZE,
+    syWall: 2.5 * TILE_SIZE,
+    sxFloor: 1.5 * TILE_SIZE,
+    syFloor: 0,
+    swidthWall: 22,
+    sheightWall: 22,
+    swidthFloor: 22,
+    sheightFloor: 22,
+    widthWall: TILE_SIZE + 2,
+    heightWall: TILE_SIZE + 2,
+    widthFloor: TILE_SIZE + 1,
+    heightFloor: TILE_SIZE + 1
+  },
+  2: {
+    src: 'images/textures2.png',
+    sxWall: 311,
+    syWall: 344,
+    sxFloor: 830,
+    syFloor: 320,
+    swidthWall: 40,
+    sheightWall: 40,
+    swidthFloor: 40,
+    sheightFloor: 40,
+    widthWall: TILE_SIZE + 3,
+    heightWall: TILE_SIZE + 3,
+    widthFloor: TILE_SIZE + 12,
+    heightFloor: TILE_SIZE + 12
+  }
+};
