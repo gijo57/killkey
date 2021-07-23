@@ -72,6 +72,10 @@ button {
   justify-content: space-between;
 }
 
+#maps h2 {
+  margin: 10px;
+}
+
 #maplist {
   margin: 0;
   padding: 0;
@@ -79,6 +83,9 @@ button {
   display: flex;
   flex-direction: column;
   list-style-position: inside;
+}
+#maplist li {
+  margin: 5px;
 }
 
 #btns {
