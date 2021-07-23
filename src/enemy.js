@@ -76,8 +76,6 @@ class Enemy {
       this.game.map.collide(this)
     ) {
       this.returnToStart = true;
-    } else if (true) {
-      //this.returnToStart = false;
     }
   }
 
