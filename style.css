@@ -20,6 +20,12 @@ body {
   background: black;
 }
 
+#start {
+  background-image: url('images/background.jpg');
+  background-position: center;
+  background-size: contain;
+}
+
 #start h1 {
   margin: 0;
   font-size: 200px;
@@ -45,6 +51,7 @@ h2 {
 }
 
 button {
+  border: 2px solid red;
   margin: 40px;
   font-family: 'bloodlust expanded';
   font-size: 50px;
