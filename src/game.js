@@ -40,8 +40,8 @@ class Game {
     if (!this.player.hasKey) {
       this.key.draw();
     }
-    this.player.draw();
     this.enemies.forEach((enemy) => enemy.draw());
+    this.player.draw();
     this.projectiles.forEach((projectile) => projectile.draw());
     this.info.draw(this.player.health);
   }
@@ -131,7 +131,7 @@ class Game {
         if (projectile.collide(enemy)) {
           if (!enemy.dead) {
             this.projectiles.splice(projectileIndex, 1);
-            enemy.health -= 5;
+            enemy.health -= 10;
             if (enemy.health <= 0) {
               enemy.die();
             }
@@ -158,6 +158,7 @@ class Game {
 
   passLevel() {
     this.running = false;
+    this.displayScreen('passScreen');
     console.log('PASS LEVEL!');
   }
 

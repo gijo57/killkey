@@ -19,7 +19,7 @@ class Enemy {
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
-    this.maxDistance = 300;
+    this.maxDistance = 250;
     this.returnToStart = false;
     this.frame = 0;
   }

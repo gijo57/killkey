@@ -15,7 +15,7 @@ for (let i = 0; i < mapList.length; i++) {
     mapListElement.style.display = 'none';
     chosenMap.style.display = 'flex';
     mapNumber = Number(e.target.id);
-    chosenMap.querySelector('span').innerText = mapNumber;
+    chosenMap.querySelector('span').innerText = mapList[i].innerText;
   });
 }
 
@@ -25,10 +25,13 @@ const mapButton = document.querySelector('#btn-map');
 
 const gameScreen = document.querySelector('#game');
 
+const passScreen = document.querySelector('#pass');
+const mainMenuButton = document.querySelector('#btn-mainmenu');
+
 const gameOverScreen = document.querySelector('#game-over');
 const tryAgainButton = document.querySelector('#btn-again');
 
-const screens = { startScreen, gameScreen, gameOverScreen };
+const screens = { startScreen, passScreen, gameScreen, gameOverScreen };
 
 const game = new Game(canvas, screens, tryAgainButton);
 
@@ -43,4 +46,9 @@ mapButton.addEventListener('click', () => {
   startButton.style.display = 'none';
   mapButton.style.display = 'none';
   chosenMap.style.display = 'none';
+});
+
+mainMenuButton.addEventListener('click', () => {
+  passScreen.style.display = 'none';
+  startScreen.style.display = 'flex';
 });
