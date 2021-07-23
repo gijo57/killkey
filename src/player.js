@@ -1,3 +1,8 @@
+const playerImgA = new Image();
+playerImgA.src = 'images/Player1-A.png';
+const playerImgB = new Image();
+playerImgB.src = 'images/Player1-B.png';
+
 class Player {
   constructor(game, x, y) {
     this.game = game;
@@ -5,22 +10,38 @@ class Player {
     this.x = x;
     this.y = y;
     this.width = 40;
-    this.height = 20;
+    this.height = 30;
     this.direction = 0;
     this.speed = 2.5;
     this.hasKey = false;
     this.weapon = new Weapon(this);
+    this.frame = 0;
+    this.moving = false;
   }
 
   draw() {
+    let playerImg;
+    if (this.moving) {
+      if (this.frame < 15) {
+        playerImg = playerImgA;
+      } else {
+        playerImg = playerImgB;
+      }
+    } else {
+      playerImg = playerImgB;
+    }
+
     this.rotate();
-    this.game.ctx.fillRect(
+    this.game.ctx.drawImage(
+      playerImg,
       this.x - this.width / 2,
       this.y - this.height / 2,
       this.width,
       this.height
     );
     this.game.ctx.restore();
+    this.frame++;
+    this.frame %= 30;
   }
 
   collide(element) {
@@ -36,6 +57,7 @@ class Player {
     this.calculateDirection();
 
     if (direction === 'forward') {
+      this.moving = true;
       if (this.x >= this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
         this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
         this.game.map.moveCamera();

@@ -99,6 +99,8 @@ class Game {
       let key = e.key;
       if (key === ' ') {
         key = 'Space';
+      } else if (key === 'ArrowUp') {
+        this.player.moving = false;
       }
       if (this.keyController[key]) {
         this.keyController[key].pressed = false;

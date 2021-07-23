@@ -1,3 +1,8 @@
+const enemyImgA = new Image();
+enemyImgA.src = 'images/Player2-A.png';
+const enemyImgB = new Image();
+enemyImgB.src = 'images/Player2-B.png';
+
 class Enemy {
   constructor(game, x, y) {
     this.game = game;
@@ -6,7 +11,7 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.width = 40;
-    this.height = 20;
+    this.height = 30;
     this.direction = 0;
     this.speed = 1;
     this.dead = false;
@@ -14,19 +19,32 @@ class Enemy {
     this.walk = false;
     this.maxDistance = 300;
     this.returnToStart = false;
+    this.frame = 0;
   }
 
   draw() {
-    if (!this.dead) {
-      this.rotate();
+    let enemyImg;
+    if (this.walk) {
+      if (this.frame < 15) {
+        enemyImg = enemyImgA;
+      } else {
+        enemyImg = enemyImgB;
+      }
+    } else {
+      enemyImg = enemyImgB;
     }
-    this.game.ctx.fillRect(
+
+    this.rotate();
+    this.game.ctx.drawImage(
+      enemyImg,
       this.x - this.width / 2 - this.game.map.offsetX,
       this.y - this.height / 2 - this.game.map.offsetY,
       this.width,
       this.height
     );
     this.game.ctx.restore();
+    this.frame++;
+    this.frame %= 30;
   }
 
   move() {
