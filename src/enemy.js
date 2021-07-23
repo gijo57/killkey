@@ -15,7 +15,7 @@ class Enemy {
     this.width = 40;
     this.height = 30;
     this.direction = 0;
-    this.speed = 1;
+    this.speed = 2;
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
@@ -28,7 +28,7 @@ class Enemy {
     let enemyImg;
 
     if (!this.dead) {
-      if (this.walk) {
+      if (this.walk && this.distance < this.maxDistance) {
         if (this.frame < 15) {
           enemyImg = enemyImgA;
         } else {
@@ -76,7 +76,7 @@ class Enemy {
       this.returnToStart = false;
     }
 
-    if (this.playerDistance < 400) {
+    if (this.playerDistance < 300) {
       this.walk = true;
       this.returnToStart = false;
     }

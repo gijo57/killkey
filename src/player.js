@@ -12,7 +12,7 @@ class Player {
     this.width = 40;
     this.height = 30;
     this.direction = 0;
-    this.speed = 2.5 * 4;
+    this.speed = 2.5;
     this.hasKey = false;
     this.weapon = new Weapon(this);
     this.frame = 0;
