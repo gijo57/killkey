@@ -22,24 +22,24 @@ class Map {
             textureImage,
             3 * this.tileSize,
             2.5 * this.tileSize,
-            24,
-            24,
+            22,
+            22,
             0 + i * this.tileSize - this.offsetX,
             0 + j * this.tileSize - this.offsetY,
-            this.tileSize,
-            this.tileSize
+            this.tileSize + 2,
+            this.tileSize + 2
           );
         } else {
           this.game.ctx.drawImage(
             textureImage,
             1.5 * this.tileSize,
             0,
-            24,
-            24,
+            22,
+            22,
             0 + i * this.tileSize - this.offsetX,
             0 + j * this.tileSize - this.offsetY,
-            this.tileSize,
-            this.tileSize
+            this.tileSize + 1,
+            this.tileSize + 1
           );
           if (this.map[j][i] === 'K') {
             this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
@@ -83,26 +83,36 @@ class Map {
     );
   }
 
-  moveCamera() {
+  moveCamera(direction) {
     const previousPosition = { x: this.offsetX, y: this.offsetY };
     if (this.game.player.directionVector) {
       this.directionVector = {
         x: -this.game.player.directionVector.x,
         y: -this.game.player.directionVector.y
       };
+    }
+    let newPosition;
 
-      const newPosition = {
+    if (direction === 'forward') {
+      newPosition = {
         x: this.offsetX + this.directionVector.x * this.game.player.speed,
         y: this.offsetY + this.directionVector.y * this.game.player.speed
       };
+    }
 
-      if (this.collide(this.game.player, newPosition.x, newPosition.y)) {
-        this.offsetX = previousPosition.x;
-        this.offsetY = previousPosition.y;
-      } else {
-        this.offsetX = newPosition.x;
-        this.offsetY = newPosition.y;
-      }
+    if (direction === 'backward') {
+      newPosition = {
+        x: this.offsetX - this.directionVector.x * (this.game.player.speed - 1),
+        y: this.offsetY - this.directionVector.y * (this.game.player.speed - 1)
+      };
+    }
+
+    if (this.collide(this.game.player, newPosition.x, newPosition.y)) {
+      this.offsetX = previousPosition.x;
+      this.offsetY = previousPosition.y;
+    } else {
+      this.offsetX = newPosition.x;
+      this.offsetY = newPosition.y;
     }
   }
 

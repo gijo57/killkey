@@ -60,16 +60,36 @@ class Player {
       this.moving = true;
       if (this.x >= this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
         this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
+        this.game.map.moveCamera(direction);
       } else if (this.x <= CAMERA_PADDING_HORIZONTAL) {
         this.x = CAMERA_PADDING_HORIZONTAL;
-        this.game.map.moveCamera();
+        this.game.map.moveCamera(direction);
       } else if (this.y >= this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
         this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
+        this.game.map.moveCamera(direction);
       } else if (this.y <= CAMERA_PADDING_VERTICAL) {
         this.y = CAMERA_PADDING_VERTICAL;
-        this.game.map.moveCamera();
+        this.game.map.moveCamera(direction);
+      } else {
+        this.x -= this.directionVector.x * this.speed;
+        this.y -= this.directionVector.y * this.speed;
+      }
+    }
+
+    if (direction === 'backward') {
+      this.moving = true;
+      if (this.x >= this.game.canvas.width - CAMERA_PADDING_HORIZONTAL) {
+        this.x = this.game.canvas.width - CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera(direction);
+      } else if (this.x <= CAMERA_PADDING_HORIZONTAL) {
+        this.x = CAMERA_PADDING_HORIZONTAL;
+        this.game.map.moveCamera(direction);
+      } else if (this.y >= this.game.canvas.height - CAMERA_PADDING_VERTICAL) {
+        this.y = this.game.canvas.height - CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera(direction);
+      } else if (this.y <= CAMERA_PADDING_VERTICAL) {
+        this.y = CAMERA_PADDING_VERTICAL;
+        this.game.map.moveCamera(direction);
       } else {
         this.x -= this.directionVector.x * this.speed;
         this.y -= this.directionVector.y * this.speed;

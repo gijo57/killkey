@@ -97,7 +97,7 @@ class Enemy {
     }
 
     if (
-      (this.playerDistance > 400 && this.distance >= this.maxDistance) ||
+      (this.playerDistance > 300 && this.distance >= this.maxDistance) ||
       this.game.map.collide(this)
     ) {
       this.returnToStart = true;
@@ -178,8 +178,10 @@ class Enemy {
   }
 
   shoot() {
-    if (this.playerDistance < 300) {
-      this.weapon.shoot();
+    if (!this.returnToStart) {
+      if (this.playerDistance < 350) {
+        this.weapon.shoot();
+      }
     }
   }
 }

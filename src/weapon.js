@@ -17,19 +17,21 @@ class Weapon {
       if (this.owner instanceof Player) {
         projectile = new Projectile(
           this.owner.game,
-          x,
+          this.owner,
+          x - this.owner.directionVector.x * 15,
           y,
           this.owner.direction
         );
       } else {
         projectile = new Projectile(
           this.owner.game,
+          this.owner,
           this.owner.x -
             this.owner.game.map.offsetX -
             this.owner.directionVector.x * 15,
           this.owner.y -
             this.owner.game.map.offsetY -
-            this.owner.directionVector.y * 15,
+            this.owner.directionVector.y,
           this.owner.direction
         );
       }

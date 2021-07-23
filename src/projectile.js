@@ -1,5 +1,6 @@
 class Projectile {
-  constructor(game, x, y, direction) {
+  constructor(game, owner, x, y, direction) {
+    this.owner = owner;
     this.game = game;
     this.x = x;
     this.y = y;

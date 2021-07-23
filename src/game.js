@@ -53,7 +53,7 @@ class Game {
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
         enemy.move();
-        //enemy.shoot();
+        enemy.shoot();
       }
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
@@ -99,7 +99,7 @@ class Game {
       let key = e.key;
       if (key === ' ') {
         key = 'Space';
-      } else if (key === 'ArrowUp') {
+      } else if (key === 'ArrowUp' || key === 'ArrowDown') {
         this.player.moving = false;
       }
       if (this.keyController[key]) {
@@ -128,7 +128,8 @@ class Game {
       }
 
       this.projectiles.forEach((projectile, projectileIndex) => {
-        if (projectile.collide(enemy)) {
+        console.log(projectile.owner);
+        if (projectile.collide(enemy) && projectile.owner instanceof Player) {
           if (!enemy.dead) {
             this.projectiles.splice(projectileIndex, 1);
             enemy.health -= 10;
@@ -137,7 +138,10 @@ class Game {
             }
           }
         }
-        if (projectile.collide(this.player)) {
+        if (
+          projectile.collide(this.player) &&
+          projectile.owner instanceof Enemy
+        ) {
           this.projectiles.splice(projectileIndex, 1);
           this.player.health -= 5;
           if (this.player.health <= 0) {
