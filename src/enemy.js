@@ -42,6 +42,10 @@ class Enemy {
       this.startPosition.y
     );
 
+    if (this.x === this.startPosition.x && this.y === this.startPosition.y) {
+      this.walk = false;
+    }
+
     if (this.playerDistance < 400) {
       this.walk = true;
     }
@@ -56,6 +60,13 @@ class Enemy {
         this.x = this.x - this.directionVector.x * this.speed;
         this.y = this.y - this.directionVector.y * this.speed;
       }
+    }
+
+    if (
+      (this.playerDistance > 400 && this.distance >= this.maxDistance) ||
+      this.game.map.collide(this)
+    ) {
+      console.log(this.walk, 'hi');
     }
   }
 
