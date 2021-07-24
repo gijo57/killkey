@@ -23,6 +23,10 @@ const mapTextureSources = {
       2: 'images/map1decor/sinkhorizontal.png',
       3: 'images/map1decor/shelfvertical.png',
       4: 'images/map1decor/vialvertical.png'
+    },
+    decorSize: {
+      width: 60,
+      height: 60
     }
   },
   2: {
@@ -44,6 +48,10 @@ const mapTextureSources = {
       2: 'images/map2decor/tombhorizontal.png',
       3: 'images/map2decor/barrel.png',
       4: 'images/map2decor/crate.png'
+    },
+    decorSize: {
+      width: 30,
+      height: 30
     }
   }
 };

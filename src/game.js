@@ -53,7 +53,7 @@ class Game {
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
         enemy.move();
-        //enemy.shoot();
+        enemy.shoot();
       }
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
@@ -118,7 +118,7 @@ class Game {
         if (projectile.collide(enemy) && projectile.owner instanceof Player) {
           if (!enemy.dead) {
             this.projectiles.splice(projectileIndex, 1);
-            enemy.health -= 20;
+            enemy.health -= 10;
             if (enemy.health <= 0) {
               enemy.die();
             }
@@ -129,7 +129,7 @@ class Game {
           projectile.owner instanceof Enemy
         ) {
           this.projectiles.splice(projectileIndex, 1);
-          this.player.health -= 10;
+          this.player.health -= 5;
           if (this.player.health <= 0) {
             this.gameOver();
           }

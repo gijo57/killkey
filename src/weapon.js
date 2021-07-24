@@ -28,7 +28,7 @@ class Weapon {
           y,
           this.owner.direction
         );
-      } else {
+      } else if (this.owner instanceof Enemy) {
         this.calculateEnemyAimFactor();
         projectile = new Projectile(
           this.owner.game,
