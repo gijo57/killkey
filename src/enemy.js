@@ -76,12 +76,12 @@ class Enemy {
       this.returnToStart = false;
     }
 
-    if (this.playerDistance < 300) {
+    if (this.playerDistance < 250) {
       this.walk = true;
       this.returnToStart = false;
     }
 
-    if (this.playerDistance < 200) {
+    if (this.playerDistance < 100) {
       this.walk = false;
     }
 
@@ -97,7 +97,7 @@ class Enemy {
     }
 
     if (
-      (this.playerDistance > 300 && this.distance >= this.maxDistance) ||
+      (this.playerDistance > 250 && this.distance >= this.maxDistance) ||
       this.game.map.collide(this)
     ) {
       this.returnToStart = true;
@@ -179,7 +179,7 @@ class Enemy {
 
   shoot() {
     if (!this.returnToStart) {
-      if (this.playerDistance < 350) {
+      if (this.playerDistance < 300) {
         this.weapon.shoot();
       }
     }

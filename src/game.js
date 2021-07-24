@@ -53,7 +53,7 @@ class Game {
     this.enemies.forEach((enemy) => {
       if (!enemy.dead) {
         enemy.move();
-        enemy.shoot();
+        //enemy.shoot();
       }
     });
     this.projectiles.forEach((projectile) => projectile.runLogic());
@@ -114,25 +114,11 @@ class Game {
     }
 
     this.enemies.forEach((enemy) => {
-      if (enemy.collide(this.player)) {
-        if (!enemy.dead) {
-          enemy.health -= 1;
-          if (enemy.health <= 0) {
-            enemy.die();
-          }
-          this.player.health -= 1;
-          if (this.player.health <= 0) {
-            this.gameOver();
-          }
-        }
-      }
-
       this.projectiles.forEach((projectile, projectileIndex) => {
-        console.log(projectile.owner);
         if (projectile.collide(enemy) && projectile.owner instanceof Player) {
           if (!enemy.dead) {
             this.projectiles.splice(projectileIndex, 1);
-            enemy.health -= 10;
+            enemy.health -= 20;
             if (enemy.health <= 0) {
               enemy.die();
             }
@@ -143,7 +129,7 @@ class Game {
           projectile.owner instanceof Enemy
         ) {
           this.projectiles.splice(projectileIndex, 1);
-          this.player.health -= 5;
+          this.player.health -= 10;
           if (this.player.health <= 0) {
             this.gameOver();
           }
@@ -163,7 +149,6 @@ class Game {
   passLevel() {
     this.running = false;
     this.displayScreen('passScreen');
-    console.log('PASS LEVEL!');
   }
 
   update() {

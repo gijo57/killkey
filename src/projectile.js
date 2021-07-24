@@ -1,18 +1,20 @@
 class Projectile {
-  constructor(game, owner, x, y, direction) {
+  constructor(game, owner, aimFactor, x, y, direction) {
     this.owner = owner;
     this.game = game;
     this.x = x;
     this.y = y;
     this.width = 3;
-    this.height = 3;
+    this.height = 5;
     this.direction = direction;
     this.speed = 10;
+    this.aimFactor = aimFactor;
   }
 
   draw() {
     this.game.ctx.save();
-    this.game.ctx.fillStyle = 'red';
+    this.rotate();
+    this.game.ctx.fillStyle = 'grey';
     this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
     this.game.ctx.restore();
   }
@@ -39,12 +41,33 @@ class Projectile {
     );
   }
 
-  runLogic() {
+  rotate() {
+    this.direction %= 360;
+
+    this.game.ctx.save();
+    let rad = (this.direction * Math.PI) / 180;
+    this.game.ctx.translate(this.x, this.y);
+    this.game.ctx.rotate(rad);
+    this.game.ctx.translate(-this.x, -this.y);
+  }
+
+  calculateDirection() {
     let rad = (this.direction + 90) * (Math.PI / 180);
+
     const x = Math.cos(rad);
     const y = Math.sin(rad);
 
-    this.x -= x * this.speed;
-    this.y -= y * this.speed;
+    this.directionVector = { x, y };
+  }
+
+  runLogic() {
+    this.calculateDirection();
+    if (this.owner instanceof Enemy) {
+      this.x = this.x - this.directionVector.x * this.speed + this.aimFactor;
+      this.y = this.y - this.directionVector.y * this.speed + this.aimFactor;
+    } else {
+      this.x = this.x - this.directionVector.x * this.speed;
+      this.y = this.y - this.directionVector.y * this.speed;
+    }
   }
 }

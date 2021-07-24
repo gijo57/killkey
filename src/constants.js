@@ -17,7 +17,13 @@ const mapTextureSources = {
     widthWall: TILE_SIZE + 2,
     heightWall: TILE_SIZE + 2,
     widthFloor: TILE_SIZE + 1,
-    heightFloor: TILE_SIZE + 1
+    heightFloor: TILE_SIZE + 1,
+    decors: {
+      1: 'images/map1decor/bedvertical.png',
+      2: 'images/map1decor/sinkhorizontal.png',
+      3: 'images/map1decor/shelfvertical.png',
+      4: 'images/map1decor/vialvertical.png'
+    }
   },
   2: {
     src: 'images/textures2.png',
@@ -32,6 +38,12 @@ const mapTextureSources = {
     widthWall: TILE_SIZE + 3,
     heightWall: TILE_SIZE + 3,
     widthFloor: TILE_SIZE + 12,
-    heightFloor: TILE_SIZE + 12
+    heightFloor: TILE_SIZE + 12,
+    decors: {
+      1: 'images/map2decor/tombvertical.png',
+      2: 'images/map2decor/tombhorizontal.png',
+      3: 'images/map2decor/barrel.png',
+      4: 'images/map2decor/crate.png'
+    }
   }
 };

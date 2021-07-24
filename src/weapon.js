@@ -5,33 +5,37 @@ class Weapon {
     this.lastShot = Date.now();
   }
 
+  calculateEnemyAimFactor() {
+    this.aimFactor = Math.random() * 2;
+    this.aimFactor *= Math.round(Math.random()) ? 1 : -1;
+  }
+
   shoot() {
     const currentShot = Date.now();
 
     if (currentShot - this.lastShot > this.fireRate) {
       this.owner.calculateDirection();
-      const x = this.owner.x - this.owner.directionVector.x * 20;
-      const y = this.owner.y - this.owner.directionVector.y * 20;
+      const x = this.owner.x - this.owner.directionVector.x;
+      const y = this.owner.y - this.owner.directionVector.y;
 
       let projectile;
       if (this.owner instanceof Player) {
         projectile = new Projectile(
           this.owner.game,
           this.owner,
-          x - this.owner.directionVector.x * 15,
+          this.aimFactor,
+          x,
           y,
           this.owner.direction
         );
       } else {
+        this.calculateEnemyAimFactor();
         projectile = new Projectile(
           this.owner.game,
           this.owner,
-          this.owner.x -
-            this.owner.game.map.offsetX -
-            this.owner.directionVector.x * 15,
-          this.owner.y -
-            this.owner.game.map.offsetY -
-            this.owner.directionVector.y,
+          this.aimFactor,
+          this.owner.x - this.owner.game.map.offsetX,
+          this.owner.y - this.owner.game.map.offsetY,
           this.owner.direction
         );
       }

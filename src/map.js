@@ -1,5 +1,8 @@
 const textureImage = new Image();
-
+const decorImage1 = new Image();
+const decorImage2 = new Image();
+const decorImage3 = new Image();
+const decorImage4 = new Image();
 const doorImage = new Image();
 doorImage.src = 'images/door.png';
 
@@ -13,13 +16,17 @@ class Map {
     this.horizontalTileCount = maps[mapNumber - 1][0].length;
     this.verticalTileCount = maps[mapNumber - 1].length;
     textureImage.src = mapTextureSources[mapNumber].src;
+    decorImage1.src = mapTextureSources[mapNumber].decors[1];
+    decorImage2.src = mapTextureSources[mapNumber].decors[2];
+    decorImage3.src = mapTextureSources[mapNumber].decors[3];
+    decorImage4.src = mapTextureSources[mapNumber].decors[4];
   }
 
   draw() {
     this.game.ctx.save();
     for (let i = 0; i < this.horizontalTileCount; i++) {
       for (let j = 0; j < this.verticalTileCount; j++) {
-        if (this.map[j][i] === 1) {
+        if (this.map[j][i] === 1 || this.map[j][i] === 'D') {
           this.game.ctx.drawImage(
             textureImage,
             mapTextureSources[mapNumber].sxWall,
@@ -31,22 +38,7 @@ class Map {
             mapTextureSources[mapNumber].widthWall,
             mapTextureSources[mapNumber].heightWall
           );
-        } else {
-          this.game.ctx.drawImage(
-            textureImage,
-            mapTextureSources[mapNumber].sxFloor,
-            mapTextureSources[mapNumber].syFloor,
-            mapTextureSources[mapNumber].swidthFloor,
-            mapTextureSources[mapNumber].sheightFloor,
-            0 + i * this.tileSize - this.offsetX,
-            0 + j * this.tileSize - this.offsetY,
-            mapTextureSources[mapNumber].widthFloor,
-            mapTextureSources[mapNumber].heightFloor
-          );
-          if (this.map[j][i] === 'K') {
-            this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
-            this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
-          } else if (this.map[j][i] === 'D') {
+          if (this.map[j][i] === 'D') {
             this.game.ctx.drawImage(
               textureImage,
               mapTextureSources[mapNumber].sxWall,
@@ -69,6 +61,73 @@ class Map {
               this.tileSize,
               this.tileSize
             );
+          }
+        } else {
+          this.game.ctx.drawImage(
+            textureImage,
+            mapTextureSources[mapNumber].sxFloor,
+            mapTextureSources[mapNumber].syFloor,
+            mapTextureSources[mapNumber].swidthFloor,
+            mapTextureSources[mapNumber].sheightFloor,
+            0 + i * this.tileSize - this.offsetX,
+            0 + j * this.tileSize - this.offsetY,
+            mapTextureSources[mapNumber].widthFloor,
+            mapTextureSources[mapNumber].heightFloor
+          );
+
+          if (this.map[j][i] === 'D1') {
+            this.game.ctx.drawImage(
+              decorImage1,
+              0,
+              0,
+              30,
+              30,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
+          } else if (this.map[j][i] === 'D2') {
+            this.game.ctx.drawImage(
+              decorImage2,
+              0,
+              0,
+              40,
+              30,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize + 10,
+              this.tileSize
+            );
+          } else if (this.map[j][i] === 'D3') {
+            this.game.ctx.drawImage(
+              decorImage3,
+              0,
+              0,
+              30,
+              30,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
+          } else if (this.map[j][i] === 'D4') {
+            this.game.ctx.drawImage(
+              decorImage4,
+              0,
+              0,
+              30,
+              30,
+              0 + i * this.tileSize - this.offsetX,
+              0 + j * this.tileSize - this.offsetY,
+              this.tileSize,
+              this.tileSize
+            );
+          }
+
+          if (this.map[j][i] === 'K') {
+            this.game.keyLocation.x = 0 + i * this.tileSize - this.offsetX;
+            this.game.keyLocation.y = 0 + j * this.tileSize - this.offsetY;
           }
         }
       }
@@ -154,7 +213,13 @@ class Map {
           element.y + element.height / 2 >= y &&
           element.y - element.height / 2 <= y + this.tileSize
         ) {
-          if (this.map[j][i] === 1) {
+          if (
+            this.map[j][i] === 1 ||
+            this.map[j][i] === 'D1' ||
+            this.map[j][i] === 'D2' ||
+            this.map[j][i] === 'D3' ||
+            this.map[j][i] === 'D4'
+          ) {
             return true;
           }
           if (this.map[j][i] === 'D') {
