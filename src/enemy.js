@@ -15,7 +15,7 @@ class Enemy {
     this.width = 40;
     this.height = 30;
     this.direction = 0;
-    this.speed = 2;
+    this.speed = 1.5;
     this.dead = false;
     this.weapon = new Weapon(this);
     this.walk = false;
@@ -95,11 +95,10 @@ class Enemy {
         this.y = this.y - this.directionVector.y * this.speed;
       }
     }
-
-    if (
-      (this.playerDistance > 250 && this.distance >= this.maxDistance) ||
-      this.game.map.collide(this)
-    ) {
+    if (this.game.map.collide(this)) {
+      this.returnToStart = true;
+    }
+    if (this.playerDistance > 250 && this.distance >= this.maxDistance) {
       this.returnToStart = true;
     }
   }
